@@ -1,11 +1,11 @@
 'use client';
 import { useEffect, useState } from "react";
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { usePostHog } from "posthog-js/react";
 
 export function cookieConsentGiven(): string {
   const consent = localStorage.getItem('cookie_consent');
-  return consent ?? 'undecided';  // Use nullish coalescing to return 'undecided' if null
+  return consent ?? 'undecided';
 }
 
 const Banner: React.FC = () => {
