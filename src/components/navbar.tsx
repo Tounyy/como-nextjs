@@ -3,6 +3,7 @@
 import React, { useState, useEffect, CSSProperties } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const Navbar: React.FC = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -36,7 +37,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navigate = (path: string): void => {
-    router.push(path);
+    router.push(path, { scroll: true });
     toggleHamburger();
   };
 
@@ -45,9 +46,9 @@ const Navbar: React.FC = () => {
       <div className={`header container ${isActive ? 'active' : ''}`}>
         <div className="nav-bar">
           <div className="brand">
-            <a onClick={() => navigate('/')} style={{cursor: 'pointer'}}>
+            <Link href="/" style={{ cursor: 'pointer' }}>
               <Image src="/img/igv.svg" alt="Logo" width={100} height={50} layout="responsive" />
-            </a>
+            </Link>
           </div>
           <div className="nav-list">
             <div className={`hamburger ${isActive ? 'active' : ''}`} onClick={toggleHamburger}>
@@ -59,9 +60,9 @@ const Navbar: React.FC = () => {
               <li><a onClick={() => navigate('/novacek')}>PRO NOVÁČKY</a></li>
               <li><a onClick={() => navigate('/o-nas')}>O NÁS</a></li>
               <li><a onClick={() => navigate('/contact')}>KONTAKTY</a></li>
+              <li><Link href="/reservation" className="rezer_button">REZERVUJTE SI MÍSTO</Link></li>
             </ul>
           </div>
-          <button className="rezer_button"><a onClick={() => navigate('/reservation')}>REZERVUJTE SI MÍSTO</a></button>
         </div>
       </div>
     </section>

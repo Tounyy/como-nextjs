@@ -11,8 +11,8 @@ const Query: React.FC = () => {
   };
 
   return (
-    <section id="query" className="flex justify-center items-center py-10 min-h-[50vh]">
-      <div className="container mx-auto px-4">
+    <section id="query" className="flex justify-center items-center py-10 min-h py-[100px]">
+      <div className="container mx-auto px-4" style={{ maxWidth: '1500px' }}>
         <div className="flex flex-wrap justify-center text-left">
           <div className="w-full md:w-1/3 p-2">
             <div className="mb-4">

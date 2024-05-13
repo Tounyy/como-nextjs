@@ -1,23 +1,27 @@
+import React, { Suspense, lazy } from 'react';
 import Navbar from "@/components/navbar";
-import Learningdatahero from "@/components/como-data/learningdatahero";
-import Time_line from '@/components/como-data/time-line';
-import Video from '@/components/como-data/video';
-import Sponsors from '@/components/como-data/sponsors';
-import Application from '@/components/como-data/application';
 import Address from "@/components/address";
 import Footer from "@/components/footer";
+
+const Learningdatahero = lazy(() => import("@/components/como-data/learningdatahero"));
+const Time_line = lazy(() => import('@/components/como-data/time-line'));
+const Video = lazy(() => import('@/components/como-data/video'));
+const Sponsors = lazy(() => import('@/components/como-data/sponsors'));
+const Application = lazy(() => import('@/components/como-data/application'));
 
 export default function ComoData() {
   return (
     <>
-      <Navbar/>
-      <Learningdatahero/>
-      <Time_line/>
-      <Video/>
-      <Sponsors/>
-      <Application/>
-      <Address/>
-      <Footer/>
+      <Navbar />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Learningdatahero />
+        <Time_line />
+        <Video />
+        <Sponsors />
+        <Application />
+      </Suspense>
+      <Address />
+      <Footer />
     </>
   );
 }

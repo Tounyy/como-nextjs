@@ -1,9 +1,6 @@
-import Head from 'next/head';
-
 import Navbar from "@/components/navbar";
 import Hero from "@/components/home/hero";
 import KineticText from "@/components/home/kinetic-text";
-import Card from "@/components/home/card";
 import CardMenu from "@/components/home/menu";
 import Query from "@/components/home/query";
 import WorkspaceFeatures from "@/components/home/workspace-features";
@@ -20,7 +17,6 @@ export default function Home() {
       <Navbar/>
       <Hero/>
       <KineticText/>
-      <Card/>
       <CardMenu/>
       <Query/>
       <WorkspaceFeatures/>

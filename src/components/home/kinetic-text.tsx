@@ -31,13 +31,13 @@ const KineticText: React.FC = () => {
   }, [index]);
 
   return (
-    <section id="about" className="relative z-10 flex items-center justify-center text-center min-h-[30vh] w-full">
-      <div className="container relative z-10 min-h-[20vh] w-full flex items-center justify-center text-center">
+    <section id="about" className="relative z-10 flex items-center justify-center text-center min-h w-full md:h-[400px]">
+      <div className="container relative z-10 h-[200px] w-full flex items-center justify-center text-center">
         <div className="about-1 block box-border relative">
-          <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#353C73]">
+          <div className="text-xl md:text-2xl lg:text-5xl 8xl:text-9xl font-bold text-[#353C73] py-2">
             MÁME
           </div>
-          <div className={`text-xl md:text-2xl lg:text-3xl font-bold ${animation}`} style={{ color: "#008DD2" }}>
+          <div className={`text-xl md:text-2xl lg:text-5xl 8xl:text-9xl font-bold ${animation}`} style={{ color: "#008DD2" }}>
             <strong>{visibleText}</strong>
           </div>
         </div>

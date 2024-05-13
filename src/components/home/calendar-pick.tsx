@@ -173,6 +173,7 @@ export default function DatePickerWithRange({
           Následující Akce
         </a>
       </div>
+    
     </div>
   );
 }

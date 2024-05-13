@@ -1,171 +1,234 @@
 "use client"
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 
-interface MenuCardProps {
-  title: string;
-  time: string;
-  price: string;
-  feature1: string;
-  feature2: string;
-  feature3: string;
-  feature4: string;
-  feature5: React.ReactNode;
-  currency: string;
-  link: string;
+interface ProductDetail {
+    "Cena": string
+    "Čas": string
+    "Sdílený stůl": string
+    "Zasedací místnost": string
+    "Silná wifi síť": string
+    "Karta do kanceláře": string
+    "10 míst k sezení": string
+    "Uzamykatelná skříň": string
 }
 
-const MenuCard: React.FC<MenuCardProps> = ({
-  title,
-  time,
-  price,
-  feature1,
-  feature2,
-  feature3,
-  feature4,
-  feature5,
-  currency,
-  link
-}) => {
-  const router = useRouter();
+interface Product {
+    name: string;
+    time: string;
+    details: ProductDetail;
+}
 
-  const navigateTo = () => {
-    router.push(link);
-  };
+interface FeatureCardProps {
+    product: Product;
+    feature: keyof ProductDetail;
+}
 
-  return (
-    <>
-      <style jsx>{`
-        @media (min-width: 2560px) {
-          .menu-4k {
-            width: 420px;
-            height: 550px;
-          }
+const data = {
+  products: 
+    [
+      { 
+        name: "První návštěva", 
+        time: "od 9:00 do 19:00",
+        details: { 
+          "Cena": "Zdarma",
+          "Čas": "na celý den",
+          "Sdílený stůl": "Ano",
+          "Karta do kanceláře": "Ne", 
+          "Zasedací místnost": "Ano", 
+          "Silná wifi síť": "Ano", 
+          "10 míst k sezení": "Ne", 
+          "Schůzky s klienty": "Ne",
+          "Uzamykatelná skříň": "Ne",
         }
-      `}</style>
-      <div className="menu menu-4k w-[280px] h-[480px] md:w-[300px] md:h-[520px] mx-auto bg-white rounded-[27px] shadow-xl transition-transform duration-300 ease-in-out flex flex-col relative" style={{ boxShadow: '5px 5px 5px -2px rgba(0, 0, 0, 0.2), -5px 5px 5px -5px rgba(0, 0, 0, 0.2)' }}>
-        <div className="content">
-          <span className='overplay'></span>
-          <h1 className="text-white font-bold relative z-20 text-lg sm:text-lg md:text-xl lg:text-xl 2xl:text-2xl">
-            {title}
-          </h1>
-          <p className="text-white text-base relative z-20">{time}</p>  
-        </div>
-        <div className="card-content flex flex-col items-center p-2.5 mt-2.5">
-          <div className="flex flex-col items-center">
-            <h2 className="text-[#555555] text-[2.9375rem] font-bold -mb-4">{price}<span className="text-lg font-bold">{currency}</span></h2>
-          </div>
-          <a className="text-[#555555] text-xs pb-5">{feature1}</a>
-        </div>
-        <div className='info_box mx-auto' style={{ maxWidth: 'max-content' }}>
-          <h3 className="text-[#4A4A4A] text-xs text-left p-2 2xl:text-base">{feature2}</h3>
-          <h3 className="text-[#4A4A4A] text-xs text-left p-2 2xl:text-base">{feature3}</h3>
-          <h3 className="text-[#4A4A4A] text-xs text-left p-2 2xl:text-base">{feature4}</h3>
-          {feature5 && <div className="text-[#4A4A4A] text-xs text-center p-2 2xl:text-base">{feature5}</div>}
-        </div>
-        <div className="flex justify-center">
-          <button onClick={navigateTo} className="w-[120px] bg-[#008cd2de] text-white px-6 py-2 rounded-full text-xs font-bold relative mt-8 transition-colors duration-500 ease-in-out hover:bg-[#2d547d] focus:bg-[#2d547d] active:bg-[#2d547d] tracking-wider">
-            Objednat
-          </button>
-        </div>
-      </div>
-    </>
-  );
+      },
+
+      { 
+        name: "Jednodenní tarif",
+        time: "od 9:00 - 19:00",
+        details: { 
+          "Cena": "250 Kč",
+          "Čas": "na 1 den",
+          "Sdílený stůl": "Ano", 
+          "Karta do kanceláře": "Ano", 
+          "Zasedací místnost": "Ano", 
+          "Silná wifi síť": "Ano", 
+          "10 míst k sezení": "Ne", 
+          "Schůzky s klienty": "Ne",          
+          "Uzamykatelná skříň": "Ne",
+        }
+      },
+
+      { 
+        name: "Inkubační tarif", 
+        time: "Neomezený přístup",
+        details: { 
+          "Cena": "500 Kč",
+          "Čas": "na 1 měsíc",
+          "Sdílený stůl": "Ano", 
+          "Karta do kanceláře": "Ano", 
+          "Zasedací místnost": "Ano", 
+          "Silná wifi síť": "Ano", 
+          "10 míst k sezení": "Ne", 
+          "Schůzky s klienty": "Ne",
+          "Uzamykatelná skříň": "Ano",
+        }
+      },
+
+      { 
+        name: "Zasedací místnost",
+        time: "od  8:00 - 19:00",
+        details: { 
+          "Cena": "550 Kč",
+          "Čas": "na 1 hodinu",
+          "Sdílený stůl": "Ano", 
+          "Karta do kanceláře": "Ne", 
+          "Zasedací místnost": "Ano", 
+          "Silná wifi síť": "Ano", 
+          "10 míst k sezení": "Ano", 
+          "Schůzky s klienty": "Ano",            
+          "Uzamykatelná skříň": "Ne",
+        }
+      },
+
+      { 
+        name: "Hodinové tarify", 
+        time: "od 9:00 - 19:00",
+        details: { 
+          "Cena": "810 Kč",
+          "Čas": "30 hodin produktivity",
+          "Sdílený stůl": "Ano", 
+          "Karta do kanceláře": "Ano", 
+          "Zasedací místnost": "Ano", 
+          "Silná wifi síť": "Ano", 
+          "10 míst k sezení": "Ne", 
+          "Schůzky s klienty": "Ne",
+          "Uzamykatelná skříň": "Ne",
+        }
+      },
+
+      { 
+        name: "Hodinové tarify", 
+        time: "od 9:00 - 19:00",
+        details: { 
+          "Cena": "1500 Kč",
+          "Čas": "50 hodin produktivity",
+          "Sdílený stůl": "Ano", 
+          "Karta do kanceláře": "Ano", 
+          "Zasedací místnost": "Ano", 
+          "Silná wifi síť": "Ano", 
+          "10 míst k sezení": "Ne", 
+          "Schůzky s klienty": "Ne",            
+          "Uzamykatelná skříň": "Ne",
+        }
+      },
+
+      { 
+        name: "Měsíční tarif", 
+        time: "Neomezený přístup",
+        details: { 
+          "Cena": "1690 Kč",
+          "Čas": "na 1 měsíc",
+          "Sdílený stůl": "Ano", 
+          "Karta do kanceláře": "Ano", 
+          "Zasedací místnost": "Ano", 
+          "Silná wifi síť": "Ano", 
+          "10 míst k sezení": "Ne", 
+          "Schůzky s klienty": "Ne",
+          "Uzamykatelná skříň": "Ano",
+        }
+      },
+    ],
+
+    features: [
+      "Cena",
+      "Čas",
+      "Sdílený stůl", 
+      "Zasedací místnost", 
+      "Silná wifi síť", 
+      "Karta do kanceláře", 
+      "10 míst k sezení",
+      "Uzamykatelná skříň",
+    ] as const
 };
 
-const Menu: React.FC = () => {
-  const cardData: MenuCardProps[] = [
-    { 
-      title: "Měsíční tarif", 
-      time: "Neomezený přístup", 
-      currency: "Kč",
-      price: "1690", 
-      feature1: "na 1 měsíc", 
-      feature2: "Sdílený stůl", 
-      feature3: "Karta do kanceláře", 
-      feature4: "Zasedací místnost", 
-      feature5: "Uzamykatelná skříň", 
-      link: "https://www.coworking-most.cz/cenik/#cenik-daily" 
-    },
+const FeatureCard: React.FC<FeatureCardProps> = ({ product, feature }) => (
+    <div className="flex justify-between items-center px-6 py-2 border-b border-gray-200">
+        <span className="text-gray-700">{feature}</span>
+        <span className={`font-medium ${product.details[feature as keyof ProductDetail] === "Ano" ? 'text-green-500' : product.details[feature as keyof ProductDetail] === "Ne" ? 'text-red-500' : 'text-black'}`}>
+            {product.details[feature as keyof ProductDetail]}
+        </span>
+    </div>
+);
 
-    { 
-      title: "Inkubační tarif", 
-      time: "Neomezený přístup", 
-      currency: "Kč",
-      price: "500", 
-      feature1: "na 1 měsíc", 
-      feature2: "Sdílený stůl", 
-      feature3: "Karta do kanceláře", 
-      feature4: "Zasedací místnost", 
-      feature5: " Uzamykatelná skříň", 
-      link: "https://www.coworking-most.cz/cenik/#cenik-daily" 
-    },
+const ComparisonTable: React.FC = () => {
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-    { 
-      title: "Zasedací místnost", 
-      time: ".",
-      currency: "Kč",
-      price: "550", 
-      feature1: "na 1 hodinu", 
-      feature2: "8:00 - 19:00", 
-      feature3: "10 míst k sezení", 
-      feature4: "Schůzky s klienty",
-      feature5: <div aria-hidden="true">&nbsp;</div>,
-      link: "https://www.coworking-most.cz/cenik/#cenik-daily" 
-    },
+    const navigate = (direction: number) => {
+        setCurrentIndex((prevIndex) => (prevIndex + direction + data.products.length) % data.products.length);
+    };
 
-    { 
-      title: "Jednodenní tarif", 
-      time: "od 9:00 - 19:00",
-      currency: "Kč",
-      price: "250", 
-      feature1: "na 1 den", 
-      feature2: "Sdílený stůl", 
-      feature3: "Karta do kanceláře", 
-      feature4: "Silná wifi síť", 
-      feature5: <div aria-hidden="true">&nbsp;</div>,
-      link: "https://www.coworking-most.cz/cenik/#cenik-daily" 
-    },
+    return (
+        <div className="flex flex-col items-center justify-center min-h bg-white p-4">
+            <h1 className="text-4xl font-bold text-center my-10">Vyberte si svůj plán</h1>
+            <div className="hidden xl:block relative overflow-x-auto shadow-md sm:rounded-lg border border-gray-300">
+                <table className="w-full text-[15px] text-left text-gray-500">
+                    <thead className="text-[15px] text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                            <th scope="col" className="py-3 px-6">Vlastnost</th>
+                            {data.products.map(product => (
+                                <th key={product.name} scope="col" className="py-3 px-6">
+                                    {product.name} <br/>
+                                    <span className="text-[12px] text-gray-400">{product.time}</span>
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.features.map(feature => (
+                            <tr key={feature} className="bg-white border-b">
+                                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
+                                    {feature}
+                                </th>
+                                {data.products.map(product => (
+                                    <td key={product.name} className="py-4 px-6">
+                                        <span className={`font-medium ${product.details[feature as keyof ProductDetail] === "Ano" ? 'text-green-500' : product.details[feature as keyof ProductDetail] === "Ne" ? 'text-red-500' : 'text-black'}`}>
+                                            {product.details[feature as keyof ProductDetail]}
+                                        </span>
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
 
-    { 
-      title: "Hodinové tarify", 
-      time: "od 9:00 - 19:00", 
-      currency: "Kč",
-      price: "810", 
-      feature1: "30 hodin produktivity", 
-      feature2: "Sdílený stůl", 
-      feature3: "Karta do kanceláře", 
-      feature4: "Zasedací místnost", 
-      feature5: <div aria-hidden="true">&nbsp;</div>,
-      link: "https://www.coworking-most.cz/cenik/#cenik-daily" 
-    },
-
-    { 
-      title: "Hodinové tarify", 
-      time: "od 9:00 - 19:00", 
-      currency: "Kč",
-      price: "1500", 
-      feature1: "50 hodin produktivity", 
-      feature2: "Sdílený stůl", 
-      feature3: "Karta do kanceláře", 
-      feature4: "Zasedací místnost", 
-      feature5: <div aria-hidden="true">&nbsp;</div>,
-      link: "https://www.coworking-most.cz/cenik/#cenik-daily" 
-    },
-  ];
-
-  return (
-    <section id="menu" className="py-8">
-      <div className="container mx-auto px-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {cardData.map((card, index) => (
-            <MenuCard key={index} {...card} />
-          ))}
+            <div className="xl:hidden w-full max-w-3xl">
+                <div className="flex items-center justify-between mb-4">
+                    <button onClick={() => navigate(-1)} className="text-gray-500">
+                        <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <div className="text-center">
+                        <span className="text-xl font-semibold">{data.products[currentIndex].name}</span>
+                        <div className="text-xs">{data.products[currentIndex].time}</div>
+                    </div>
+                    <button onClick={() => navigate(1)} className="text-gray-500">
+                        <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+                {data.features.map((feature: keyof ProductDetail) => (
+                    <FeatureCard key={feature} product={data.products[currentIndex]} feature={feature} />
+                ))}
+            </div>
+            <a href="/cenik" className="mt-6 text-white bg-[#008DD2] hover:bg-[#2d547d] font-bold py-3 p-6 rounded-full">
+                Zobrazit Ceník
+            </a>
         </div>
-      </div>
-    </section>
-  );
+    );
 };
 
-export default Menu;
+export default ComparisonTable;
