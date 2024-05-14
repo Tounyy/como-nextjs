@@ -11,7 +11,7 @@ const Address: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-[40vh] w-full overflow-hidden font-poppins text-center py-7">
+    <section className="relative min-h w-full overflow-hidden font-poppins text-center py-7">
       <div className="flex justify-center flex-wrap">
         <div className="container m-4 p-5 bg-white rounded-lg max-w-sm">
           <h2 className="text-2xl text-[#353C73] font-bold mb-5 text-left">Stránky</h2>

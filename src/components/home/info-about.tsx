@@ -4,7 +4,7 @@ import React from 'react';
 
 const InfoAbout: React.FC = () => {
   return (
-    <section className="bg-white py-10 min-h-[50vh]">
+    <section className="bg-white py-10 min-h">
       <div className="container mx-auto p-4">
         <h1 className="mt-4 text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-6xl text-gray-900 font-bold text-left max-w-2xl mx-auto">
           Důležité informace
