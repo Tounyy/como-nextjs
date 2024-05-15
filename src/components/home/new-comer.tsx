@@ -49,7 +49,7 @@ const AboutUs: React.FC = () => {
 
   return (
     <section id="newcomer" className="relative flex items-center justify-center text-left min-h w-full p-5 bg-center bg-cover z-10">
-      <div className="bg-blue-50 p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+      <div className="bg-gray-100 p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
         <div className="flex flex-col lg:flex-row">
           <div className="lg:w-1/2 flex items-center justify-center">
             <img

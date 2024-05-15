@@ -13,21 +13,22 @@ const config = {
     container: {
       center: true,
       padding: "2rem",
+    },
+    extend: {
       screens: {
+        's': '360px',
         'sm': '640px',
         'md': '768px',
         'lg': '1024px',
         'xl': '1280px',
         '2xl': '1536px',
+        '2xxl': '1650px',
         '3xl': '2000px',
         '4xl': '2500px',
         '5xl': '2800px',
         '6xl': '3200px',
         '7xl': '3500px',
-        '8xl': '3840px',
       },
-    },
-    extend: {
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

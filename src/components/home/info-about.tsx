@@ -9,7 +9,7 @@ const InfoAbout: React.FC = () => {
         <h1 className="mt-4 text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-6xl text-gray-900 font-bold text-left max-w-2xl mx-auto">
           Důležité informace
         </h1>
-        <p className="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-lg text-gray-600 font-bold text-left max-w-2xl mx-auto leading-4" style={{ color: "#4A4A4A"}}>
+        <p className="mt-4 text-sm md:text-base lg:text-base xl:text-lg 2xl:text-lg text-gray-600 font-bold text-left max-w-[1200px] mx-auto leading-4" style={{ color: "#4A4A4A"}}>
           Vážení návštěvníci a členové COMO, abyste mohli plně využívat našeho coworkingového prostoru a cítili se zde jako doma, 
           sestavili jsme pro vás přehled nejdůležitějších informací a pokynů. Ať už hledáte detaily o našich otevíracích hodinách, 
           technologickém vybavení nebo bezpečnostních protokolech, naleznete je zde přehledně a stručně.

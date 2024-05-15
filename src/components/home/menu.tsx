@@ -169,17 +169,17 @@ const ComparisonTable: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h bg-white p-4">
-            <h1 className="text-4xl font-bold text-center my-10">Vyberte si svůj plán</h1>
+        <div className="flex flex-col items-center justify-center min-h bg-white p-4 py-[90px] mb-50">
+            <h1 className="text-2xl text-black mb-10 leading-none font-bold s:text-3xl md:text-3xl lg:text-5xl xl:text-6xl 2xl:text-6xl">Vyberte si svůj plán</h1>
             <div className="hidden xl:block relative overflow-x-auto shadow-md sm:rounded-lg border border-gray-300">
-                <table className="w-full text-[15px] text-left text-gray-500">
-                    <thead className="text-[15px] text-gray-700 uppercase bg-gray-50">
+                <table className="w-full text-[15px] text-left text-gray-500 2xxl:text-[16px] 4xl:text-[19px] 5xl:text-[22px] 6xl:text-[25px] 7xl:text-[30px]">
+                    <thead className="text-[15px] text-gray-700 uppercase bg-gray-50 2xxl:text-[16px] 4xl:text-[19px] 5xl:text-[22px] 6xl:text-[25px] 7xl:text-[30px]">
                         <tr>
                             <th scope="col" className="py-3 px-6">Vlastnost</th>
                             {data.products.map(product => (
                                 <th key={product.name} scope="col" className="py-3 px-6">
                                     {product.name} <br/>
-                                    <span className="text-[12px] text-gray-400">{product.time}</span>
+                                    <span className="text-[12px] 2xxl:text-[12px] 4xl:text-[14px] 5xl:text-[17px] 6xl:text-[20px] 7xl:text-[23px] text-gray-400">{product.time}</span>
                                 </th>
                             ))}
                         </tr>
@@ -224,7 +224,10 @@ const ComparisonTable: React.FC = () => {
                     <FeatureCard key={feature} product={data.products[currentIndex]} feature={feature} />
                 ))}
             </div>
-            <a href="/cenik" className="mt-6 text-white bg-[#008DD2] hover:bg-[#2d547d] font-bold py-3 p-6 rounded-full">
+            <a href="/cenik" className="
+            text-white bg-[#008DD2] hover:bg-[#2d547d] font-bold rounded-full 
+            mt-6 py-[16px] px-[20px] text-[20px]
+            7xl:mt-18 7xl:py-[30px] 7xl:px-[40px] 7xl:text-[35px]">
                 Zobrazit Ceník
             </a>
         </div>

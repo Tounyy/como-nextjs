@@ -38,6 +38,7 @@ export default function DatePickerWithRange({
   });
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [visibleIndex, setVisibleIndex] = useState(0);
 
   useEffect(() => {
     if (dateRange?.from && dateRange?.to) {
@@ -52,15 +53,17 @@ export default function DatePickerWithRange({
   }, [dateRange]);
 
   const scrollLeft = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -350, behavior: "smooth" });
-    }
+    setVisibleIndex((prevIndex) => Math.max(prevIndex - 3, 0));
   };
 
   const scrollRight = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: 350, behavior: "smooth" });
-    }
+    setVisibleIndex((prevIndex) =>
+      Math.min(prevIndex + 3, Math.max(filteredEvents.length - 3, 0))
+    );
+  };
+
+  const getVisibleEvents = () => {
+    return filteredEvents.slice(visibleIndex, visibleIndex + 3);
   };
 
   // SVG Icons
@@ -95,14 +98,14 @@ export default function DatePickerWithRange({
   );
 
   return (
-    <div className={cn("grid gap-2 flex flex-col justify-end items-center p-20", className)}>
+    <div className={cn("flex flex-col items-center p-5", className)}>
       <Popover>
         <PopoverTrigger asChild>
           <Button
             id="date"
             variant="outline"
             className={cn(
-              "w-[300px] my-20 justify-start text-left font-normal",
+              "w-[300px] my-4 justify-start text-left font-normal",
               !dateRange && "text-muted-foreground"
             )}
           >
@@ -130,19 +133,21 @@ export default function DatePickerWithRange({
         </PopoverContent>
       </Popover>
 
-      <div className={`w-full max-w-screen-lg mx-auto ${className} flex items-center`}>
+      <div className="w-full max-w-screen-xl mx-auto flex items-center justify-center">
         <button onClick={scrollLeft} className="p-2">
           {leftArrowSVG}
         </button>
         <div
           ref={carouselRef}
-          className="flex flex-nowrap gap-6 justify-start overflow-x-auto scrollbar-hide"
+          className="flex flex-nowrap gap-6 justify-center overflow-x-auto scrollbar-hide w-full"
+          style={{ scrollSnapType: "x mandatory" }}
         >
-          {filteredEvents.map((event) => (
+          {getVisibleEvents().map((event) => (
             <a
               key={event.id}
-              className="flex-none flex flex-col min-h-[280px] w-80 md:w-[calc(33%-1rem)] lg:w-80 text-black overflow-hidden border rounded-lg shadow-md"
+              className="flex-none flex flex-col min-h-[280px] w-80 md:w-[calc(33.33%-1rem)] lg:w-80 text-black overflow-hidden border rounded-lg shadow-md"
               href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}`}
+              style={{ scrollSnapAlign: "center" }}
             >
               <div className="flex-1">
                 <img
@@ -173,7 +178,6 @@ export default function DatePickerWithRange({
           Následující Akce
         </a>
       </div>
-    
     </div>
   );
 }

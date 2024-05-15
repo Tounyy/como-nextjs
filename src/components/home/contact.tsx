@@ -19,7 +19,7 @@ const Contact: React.FC<ContactProps> = () => {
 
   return (
     <section className="min-h flex items-center justify-center p-8">
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white p-2 shadow-md sm:rounded-lg border border-gray-300 sm:p-8">        
+      <div className="container  grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white p-2 shadow-md sm:rounded-lg border border-gray-300 sm:p-8 max-w-[1200px] mx-auto">
         {/* Left */}
         <div className="space-y-6 bg-[#353c73] p-8 rounded-lg shadow-xl text-white">
           <h2 className="text-xl font-bold mb-6 sm:text-2xl">
