@@ -30,7 +30,7 @@ const Hero: React.FC = () => {
             <br />
             BUDOUCNOST
           </h1>
-          <p className="text-lg text-[#4A4A4A] leading-6">
+          <p className="text-lg text-[#4A4A4A] leading-6 max-w-[600px]">
             Coworkingové centrum (COMO) v srdci Mostu nabízí nejen flexibilní a vybavené prostory na práci pro freelancery, firmy a týmová setkání, ale také komunitu, která si navzájem pomáhá a profesionální vzdělání zdarma.
           </p>
           <button 

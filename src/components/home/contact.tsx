@@ -18,7 +18,7 @@ const Contact: React.FC<ContactProps> = () => {
   };
 
   return (
-    <section id="card" className="min-h-screen flex items-center justify-center p-8">
+    <section className="min-h flex items-center justify-center p-8">
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white p-2 shadow-md sm:rounded-lg border border-gray-300 sm:p-8">        
         {/* Left */}
         <div className="space-y-6 bg-[#353c73] p-8 rounded-lg shadow-xl text-white">
@@ -37,7 +37,7 @@ const Contact: React.FC<ContactProps> = () => {
             <Image src={phone} alt="Phone" width={50} height={50} className="text-white" />
             <div className=''>
               <h3 className="text-white text-lg sm:text-base ">Telefon</h3>
-              <p className="text-white text-sm sm:text-xs">+420 734 393 753</p>
+              <p className="text-white text-sm sm:text-sm">+420 734 393 753</p>
             </div>
           </div>
 
@@ -46,7 +46,7 @@ const Contact: React.FC<ContactProps> = () => {
             <Image src={plane} alt="E-mail" width={50} height={50} className="text-white" />
             <div>
               <h3 className="text-white text-lg sm:text-base">E-mail</h3>
-              <p className="text-white text-sm sm:text-xs">info@coworking-most.cz</p>
+              <p className="text-white text-sm sm:text-sm">info@coworking-most.cz</p>
             </div>
           </div>
 
@@ -55,8 +55,8 @@ const Contact: React.FC<ContactProps> = () => {
             <Image src={key} alt="Open Hours" width={50} height={50} className="text-white" />
             <div>
               <h3 className="text-white text-lg sm:text-base">Otevírací doba</h3>
-              <p className="text-white text-sm sm:text-xs">Po – Pá 9:00 – 19:00</p>
-              <p className="text-white text-sm sm:text-xs">Měsíční členství: 24/7</p>
+              <p className="text-white text-sm sm:text-sm">Po – Pá 9:00 – 19:00</p>
+              <p className="text-white text-sm sm:text-sm">Měsíční členství: 24/7</p>
             </div>
           </div>
         </div>
@@ -65,7 +65,7 @@ const Contact: React.FC<ContactProps> = () => {
         <div className="bg-white p-2 sm:p-8">
           <form className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-[16px] font-bold text-gray-700 sm:text-sm">
+              <label htmlFor="name" className="block text-[16px] font-bold text-gray-700 sm:text-base">
                 Jméno a příjmení <span className='text-red-500'>*</span>
               </label>
               <input 
@@ -77,7 +77,7 @@ const Contact: React.FC<ContactProps> = () => {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-[16px] font-bold text-gray-700 sm:text-sm">
+              <label htmlFor="email" className="block text-[16px] font-bold text-gray-700 sm:text-base">
                 E-mail <span className='text-red-500'>*</span>
               </label>
               <input 
@@ -89,7 +89,7 @@ const Contact: React.FC<ContactProps> = () => {
             </div>
 
             <div className="mb-6">
-              <label htmlFor="message" className="block text-[16px] font-bold text-gray-700 sm:text-sm">
+              <label htmlFor="message" className="block text-[16px] font-bold text-gray-700 sm:text-base">
                 Zpráva <span className='text-red-500'>*</span>
               </label>
               <textarea 
@@ -102,7 +102,9 @@ const Contact: React.FC<ContactProps> = () => {
             </div>
 
             <div className="flex items-center mb-6">
-              <label htmlFor="consent" className="text-base sm:text-xs bg-gray-300 bg-opacity-50 rounded-lg p-4">
+              <label 
+                htmlFor="consent" 
+                className="text-xs sm:text-base bg-gray-300 bg-opacity-50 rounded-lg p-4">
                 <input
                   type="checkbox"
                   id="consent"
