@@ -6,7 +6,6 @@ import Query from "@/components/home/query";
 import WorkspaceFeatures from "@/components/home/workspace-features";
 import NewComer from "@/components/home/new-comer";
 import Calendar from "@/components/home/calendar-pick";
-import InfoAbout from "@/components/home/info-about";
 import Contact from "@/components/home/contact";
 import Address from "@/components/address";
 import Footer from "@/components/footer";
@@ -22,7 +21,6 @@ export default function Home() {
       <WorkspaceFeatures/>
       <NewComer/>
       <Calendar/>
-      <InfoAbout/>
       <Contact/>
       <Address/>
       <Footer/>

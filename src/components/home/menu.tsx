@@ -3,25 +3,25 @@
 import React, { useState } from 'react';
 
 interface ProductDetail {
-    "Cena": string
-    "Čas": string
-    "Sdílený stůl": string
-    "Zasedací místnost": string
-    "Silná wifi síť": string
-    "Karta do kanceláře": string
-    "10 míst k sezení": string
-    "Uzamykatelná skříň": string
+  "Cena": string
+  "Čas": string
+  "Sdílený stůl": string
+  "Zasedací místnost": string
+  "Silná wifi síť": string
+  "Karta do kanceláře": string
+  "10 míst k sezení": string
+  "Uzamykatelná skříň": string
 }
 
 interface Product {
-    name: string;
-    time: string;
-    details: ProductDetail;
+  name: string;
+  time: string;
+  details: ProductDetail;
 }
 
 interface FeatureCardProps {
-    product: Product;
-    feature: keyof ProductDetail;
+  product: Product;
+  feature: keyof ProductDetail;
 }
 
 const data = {
@@ -138,6 +138,8 @@ const data = {
           "Uzamykatelná skříň": "Ano",
         }
       },
+
+      
     ],
 
     features: [
@@ -153,25 +155,26 @@ const data = {
 };
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ product, feature }) => (
-    <div className="flex justify-between items-center px-6 py-2 border-b border-gray-200">
-        <span className="text-gray-700">{feature}</span>
-        <span className={`font-medium ${product.details[feature as keyof ProductDetail] === "Ano" ? 'text-green-500' : product.details[feature as keyof ProductDetail] === "Ne" ? 'text-red-500' : 'text-black'}`}>
-            {product.details[feature as keyof ProductDetail]}
-        </span>
-    </div>
+  <div className="flex justify-between items-center px-6 py-2 border-b border-gray-200">
+      <span className="text-gray-700">{feature}</span>
+      <span className={`font-medium ${product.details[feature as keyof ProductDetail] === "Ano" ? 'text-green-500' : product.details[feature as keyof ProductDetail] === "Ne" ? 'text-red-500' : 'text-black'}`}>
+          {product.details[feature as keyof ProductDetail]}
+      </span>
+  </div>
 );
 
 const ComparisonTable: React.FC = () => {
     const [currentIndex, setCurrentIndex] = useState<number>(0);
 
     const navigate = (direction: number) => {
-        setCurrentIndex((prevIndex) => (prevIndex + direction + data.products.length) % data.products.length);
+      setCurrentIndex((prevIndex) => (prevIndex + direction + data.products.length) % data.products.length);
     };
 
     return (
+      <section className="relative items-center text-center w-full mt-auto min-h-[30vh] w-full mt-[100px] sm:mt-[180px] xl:mt-[200px] 2xl:mt-[220px]">
         <div className="flex flex-col items-center justify-center min-h bg-white p-4 py-[90px] mb-50">
             <h1 className="text-2xl text-black mb-10 leading-none font-bold s:text-3xl md:text-3xl lg:text-5xl xl:text-6xl 2xl:text-6xl">Vyberte si svůj plán</h1>
-            <div className="hidden xl:block relative overflow-x-auto shadow-md sm:rounded-lg border border-gray-300">
+            <div className="hidden xl:block relative overflow-x-auto shadow-md sm:rounded-lg border border-gray-300 max-w-[1500px] 7xl:max-w-[2000px]">
                 <table className="w-full text-[15px] text-left text-gray-500 2xxl:text-[16px] 4xl:text-[19px] 5xl:text-[22px] 6xl:text-[25px] 7xl:text-[30px]">
                     <thead className="text-[15px] text-gray-700 uppercase bg-gray-50 2xxl:text-[16px] 4xl:text-[19px] 5xl:text-[22px] 6xl:text-[25px] 7xl:text-[30px]">
                         <tr>
@@ -203,7 +206,7 @@ const ComparisonTable: React.FC = () => {
                 </table>
             </div>
 
-            <div className="xl:hidden w-full max-w-3xl">
+            <div className="xl:hidden w-full max-w-4xl shadow-md p-4 rounded-lg border border-gray-300">
                 <div className="flex items-center justify-between mb-4">
                     <button onClick={() => navigate(-1)} className="text-gray-500">
                         <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -225,12 +228,15 @@ const ComparisonTable: React.FC = () => {
                 ))}
             </div>
             <a href="/cenik" className="
-            text-white bg-[#008DD2] hover:bg-[#2d547d] font-bold rounded-full 
-            mt-6 py-[16px] px-[20px] text-[20px]
-            7xl:mt-18 7xl:py-[30px] 7xl:px-[40px] 7xl:text-[35px]">
-                Zobrazit Ceník
+            text-white bg-[#008DD2] hover:bg-[#2d547d] rounded-lg	
+            7xl:mt-6 7xl:py-[16px] 7xl:px-[200px] 7xl:text-[30px]
+            lg:mt-6 lg:py-[16px] lg:px-[120px] lg:text-[20px]
+            sm:mt-6 sm:py-[16px] sm:px-[60px] sm:text-[15px]
+            s:mt-6 s:py-[16px] s:px-[30px] s:text-[12px]">
+              ZOBRAZIT CENÍK
             </a>
         </div>
+      </section>
     );
 };
 

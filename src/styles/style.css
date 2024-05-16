@@ -3,8 +3,8 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
   list-style: none;
 }
 
@@ -108,64 +108,6 @@ a {
 
 .animate-fadeOutDown {
   animation: fadeOutDown 1s ease-in-out forwards;
-}
-
-/* Menu card */
-#menu {
-  background-size: cover;
-  z-index: 1;
-  min-height: 60vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-#menu .container {
-  margin: 20px;
-  min-height: 60vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: 20px;
-}
-
-.content {
-  position: relative;
-  justify-content: center;
-  text-align: center;
-  padding: 30px;
-  z-index: 21;
-}
-
-.overplay {
-  border-radius: 25px 25px 0 0;
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 120px;
-  width: 100%;
-  background-color: #008cd2de;
-  z-index: 20;
-}
-
-.lrapper {
-  content: " ";
-  position: absolute;
-  display: block;
-  left: 50%;
-  bottom: 1;
-  width: 90px;
-  height: 2px;
-  background-color: rgba(93, 92, 92, 0.59);
-  transform: translateX(-50%);
-}
-
-.info_box {
-  text-align: left;
 }
 
 @media only screen and (max-width: 370px) and (min-width: 320px) {

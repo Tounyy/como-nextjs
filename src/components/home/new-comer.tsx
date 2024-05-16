@@ -1,102 +1,58 @@
-"use client";
+"use client"
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
-const AboutUs: React.FC = () => {
+const ImageBackground: string = "/img/home/DSC08064-1-jpg.webp";
+
+const Hero: React.FC = () => {
   const router = useRouter();
-  const navigateTo = (): void => {
-    router.push('https://www.coworking-most.cz/novacek/');
+
+  const buttonStyle: React.CSSProperties = {
+    letterSpacing: '0.05em',
+    fontWeight: 600,
+    transition: 'background-color 0.5s'
   };
 
-  const [mainImage, setMainImage] = useState('/img/home/DSC08064-1-jpg.webp');
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const images = [
-    '/img/home/DSC08064-1-jpg.webp',
-    '/img/home/DSC07970-jpg.webp',
-    '/img/home/DSC08062-jpg.webp',
-    '/img/home/DSC08064-1-jpg.webp',
-    '/img/home/DSC07970-jpg.webp',
-    '/img/home/DSC08062-jpg.webp',
-    '/img/home/DSC08064-1-jpg.webp',
-    '/img/home/DSC07970-jpg.webp',
-  ];
-
-  const handleImageClick = (image: string) => {
-    setMainImage(image);
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-  };
-
-  const getVisibleImages = () => {
-    const start = currentIndex;
-    const end = start + 4;
-    const visibleImages = images.slice(start, end);
-
-    if (visibleImages.length < 4) {
-      return [...visibleImages, ...images.slice(0, 4 - visibleImages.length)];
-    }
-
-    return visibleImages;
+  const navigate = (): void => {
+    router.push('#card');
   };
 
   return (
-    <section id="newcomer" className="relative flex items-center justify-center text-left min-h w-full p-5 bg-center bg-cover z-10">
-      <div className="bg-gray-100 p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
-        <div className="flex flex-col lg:flex-row">
-          <div className="lg:w-1/2 flex items-center justify-center">
-            <img
-              src={mainImage}
-              alt="Main"
-              className="rounded-lg shadow-md transition-transform duration-500 transform hover:scale-105"
-            />
-          </div>
-          <div className="lg:w-1/2 mt-6 lg:mt-0 lg:ml-8">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4"><strong>Jsem v COMO nový!</strong></h2>
-            <p className="text-gray-700 mb-4">
-              Vítejte v COMO! Ať už jste freelancer, start-up nebo hledáte inspirativní místo k práci, jste u nás doma. Zde najdete důležité informace pro váš pohodlný start.
-            </p>
-            <button 
-              className="bg-[#008DD2] text-white py-3 px-6 rounded-[14px] text-sm lg:text-base uppercase tracking-wider transition-colors duration-300 hover:bg-[#0070a3] focus:outline-none focus:ring-2 focus:ring-blue-500 active:bg-blue-700"
-              onClick={navigateTo}
-            >
-              VÍCE INFORMACÍ
-            </button>
-          </div>
+    <section id="hero" className="relative flex flex-col sm:flex-row items-center text-left min-h-[30vh] w-full mt-[100px] sm:mt-[180px] xl:mt-[200px] 2xl:mt-[220px]">
+      <div className="container hero-container flex flex-col sm:flex-row justify-between items-center mx-auto w-full max-w-[2000px] p-4">
+        <div className="order-2 sm:order-1 w-full sm:w-1/2 p-4 max-w-[800px]">
+          <h1 className="text-2xl text-black mb-4 leading-none font-bold lg:text-4xl xl:text-6xl 2xl:text-7xl">
+            Jsem v COMO nový!
+          </h1>
+          <p className="text-2xl p-2 font-300 text-gray-500 text-left my-2 4xl:text-2xl">
+            Vítejte v COMO! Ať už jste freelancer, start-up nebo hledáte inspirativní místo k práci, jste u nás doma. Zde najdete důležité informace pro váš pohodlný start.
+          </p>
+          <button 
+            className="bg-[#008DD2] text-white rounded-full mt-6 px-10 py-5 text-sm md:px-12 md:py-6 md:text-lg lg:px-12 lg:py-7 lg:text-xl xl:px-20 xl:py-8 xl:text-2xl 2xl:px-14 2xl:py-9 2xl:text-3xl transition-colors duration-500 hover:bg-[#2d547d] focus:bg-[#2d547d] mb-4 text-xs sm:mb-8"
+            style={buttonStyle}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#2d547d')}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
+            onFocus={e => (e.currentTarget.style.backgroundColor = '#2d547d')}
+            onBlur={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
+            onClick={navigate}
+          >
+            VÍCE INFORMACÍ
+          </button>
         </div>
-        <div className="mt-8 flex items-center justify-center">
-          <button onClick={handlePrev} className="mr-4 p-2 bg-gray-200 rounded-full shadow-md hover:bg-gray-300">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <div className="flex justify-center space-x-4">
-            {getVisibleImages().map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                alt={`Thumbnail ${index + 1}`}
-                className="w-1/6 rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105"
-                onClick={() => handleImageClick(image)}
-              />
-            ))}
-          </div>
-          <button onClick={handleNext} className="ml-4 p-2 bg-gray-200 rounded-full shadow-md hover:bg-gray-300">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+        <div className="order-1 sm:order-2 w-full sm:max-w-[50%] mb-10 sm:mb-0">
+          <Image 
+            src={ImageBackground} 
+            alt="Coworking space" 
+            width={1000} 
+            height={400} 
+            className="max-w-full h-auto block"
+          />
         </div>
       </div>
     </section>
   );
 };
 
-export default AboutUs;
+export default Hero;
