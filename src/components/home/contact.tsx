@@ -18,7 +18,7 @@ const Contact: React.FC<ContactProps> = () => {
 
   return (
     <section className="min-h flex items-center justify-center p-8">
-      <div className="container grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white p-2 shadow-md sm:rounded-lg border border-gray-300 sm:p-8 max-w-[1200px] mx-auto 4xl:max-w-[2000px] 4xl:min-h-[60vh] 3xl:max-w-[1500px] 3xl:min-h-[50vh]">
+      <div className="container grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white p-2 shadow-md sm:rounded-lg border border-gray-300 sm:p-8 max-w-[1200px] mx-auto 4xl:max-w-[1500px] 4xl:min-h-[50vh] 3xl:max-w-[1500px] 3xl:min-h-[30vh]">
         {/* Left */}
         <div className="space-y-6 bg-[#353c73] p-8 rounded-lg shadow-xl text-white">
           <h2 className="text-2xl text-white mb-10 leading-none font-bold s:text-2xl md:text-3xl 3xl:text-5xl">
@@ -116,7 +116,7 @@ const Contact: React.FC<ContactProps> = () => {
               <button 
                 className="
                   text-white bg-[#008DD2] hover:bg-[#2d547d] rounded-lg	
-                  4xl:mt-6 4xl:py-[20px] 4xl:px-[280px] 4xl:text-[1.5rem]
+                  4xl:mt-6 4xl:py-[20px] 4xl:px-[240px] 4xl:text-[1.5rem]
                   lg:mt-6 lg:py-[20px] lg:px-[140px] lg:text-[1.2rem]
                   ss:mt-2 ss:py-[18px] ss:px-[60px] ss:text-[1rem]
                   s:mt-2 s:py-[18px] s:px-[60px] s:text-[1rem]

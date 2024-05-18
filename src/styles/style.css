@@ -417,3 +417,47 @@ h3 {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.table-container {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 600px;
+}
+
+th,
+td {
+  min-width: 120px;
+  white-space: nowrap;
+  padding: 10px;
+  text-align: left;
+}
+
+.sticky-col {
+  position: sticky;
+  left: 0;
+  background-color: white;
+  z-index: 10;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Barva pozadí dráhy */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  /* Barva posuvníku */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  /* Barva posuvníku při najetí myší */
+}
