@@ -6,6 +6,12 @@ import { useRouter } from 'next/navigation';
 const Query: React.FC = () => {
   const router = useRouter();
 
+  const buttonStyle: React.CSSProperties = {
+    letterSpacing: '0.05em',
+    fontWeight: 600,
+    transition: 'background-color 0.5s'
+  };
+
   const navigateToContact = (): void => {
     router.push('#contact');
   };
@@ -23,18 +29,33 @@ const Query: React.FC = () => {
           </div>
           <div className="w-full md:w-1/3 p-2">
             <div className='hero-1'>
-              <p className="text-sm text-[#4A4A4A] font-bold leading-relaxed lg:text-base xl:text-lg 2xl:text-xl 2xl:leading-relaxed 4xl:text-3xl">
+              <p className="text-sm text-[#4A4A4A] font-bold leading-relaxed lg:text-base xl:text-lg 2xl:text-xl 2xl:leading-relaxed 4xl:text-3xl mb-4">
                 Máte nějaké další dotazy? Jsme zde pro vás, abychom vám na vše odpověděli.
               </p>
               <button 
-                className="
-                  bg-[#008DD2] text-white py-3 px-6 rounded-full text-xl mt-6 uppercase tracking-wider transition-colors duration-300 hover:bg-[#2d547d] focus:outline-none focus:ring focus:ring-blue-[#2d547d] active:bg-blue-[#2d547d] 4xl:text-2xl 4xl:py-6 4xl:px-12"
+                className="hidden ss:block px-4 py-2 border-2 border-[#008DD2] text-[#008DD2] rounded-md hover:text-white transition-colors duration-1000 w-[300px] ss:w-[200px] sm:w-[250px] md:w-[200px]"
+                style={buttonStyle}
+                onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
+                onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'transparent')}
+                onFocus={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
+                onBlur={e => (e.currentTarget.style.backgroundColor = 'transparent')}
                 onClick={navigateToContact}
               >
                 KONTAKT
               </button>
             </div>
           </div>
+          <button 
+            className="ss:hidden px-4 py-2 border-2 border-[#008DD2] text-[#008DD2] rounded-md hover:text-white transition-colors duration-1000 w-[300px] ss:w-[200px] sm:w-[250px] md:w-[300px]"
+            style={buttonStyle}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'transparent')}
+            onFocus={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
+            onBlur={e => (e.currentTarget.style.backgroundColor = 'transparent')}
+            onClick={navigateToContact}
+          >
+            KONTAKT
+          </button>
         </div>
       </div>
     </section>

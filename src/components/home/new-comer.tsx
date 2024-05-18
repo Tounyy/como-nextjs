@@ -21,7 +21,7 @@ const AboutUs: React.FC = () => {
 
   return (
     <section className="relative flex flex-col sm:flex-row items-center text-left min-h-[30vh] w-full">
-      <div className="container hero-container flex flex-col sm:flex-row justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4">
+      <div className="container flex flex-col sm:flex-row justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4">
         <div className="flex flex-col md:flex-row items-center">
           <div className="w-full md:w-1/2 mb-8 md:mb-0">
             <Image 

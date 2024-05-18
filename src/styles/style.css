@@ -186,9 +186,9 @@ a {
 .rezer_button {
   background-color: #008DD2;
   color: white;
-  font-weight: bold;
+  font-weight: 600;
   padding: 8px 24px;
-  border-radius: 9999px;
+  border-radius: 9px;
   transition: background-color 0.7s;
   cursor: pointer;
   letter-spacing: 0.05em;
@@ -218,11 +218,11 @@ a {
 #header .nav-list ul a {
   display: inline-block;
   font-size: 25px;
-  font-weight: 500;
   text-decoration: none;
   text-transform: uppercase;
   display: block;
   padding: 20px;
+  font-weight: 600;
 }
 
 #header .nav-list ul li:hover a {

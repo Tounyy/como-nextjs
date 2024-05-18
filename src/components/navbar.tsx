@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
               <li><a onClick={() => navigate('/novacek')}>PRO NOVÁČKY</a></li>
               <li><a onClick={() => navigate('/o-nas')}>O NÁS</a></li>
               <li><a onClick={() => navigate('/contact')}>KONTAKTY</a></li>
-              <li><Link href="/reservation" className="rezer_button">REZERVUJTE SI MÍSTO</Link></li>
+              <li><Link href="/reservation" className="font-600 rezer_button">REZERVUJTE SI MÍSTO</Link></li>
             </ul>
           </div>
         </div>

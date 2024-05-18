@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 const ImageBackground: string = "/img/home/Group-17.png";
 
-const Hero: React.FC = () => {
+const AboutUs: React.FC = () => {
   const router = useRouter();
 
   const buttonStyle: React.CSSProperties = {
@@ -20,43 +20,43 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="hero" className="relative flex flex-col sm:flex-row items-center text-left min-h-[30vh] w-full mt-[100px] sm:mt-[180px] xl:mt-[200px] 2xl:mt-[220px]">
-      <div className="container mx-auto w-full max-w-7xl p-4">
-        <div className="flex flex-col sm:flex-row justify-between items-center">
-          <div className="order-2 sm:order-1 w-full sm:w-1/2 p-4">
+    <section id="hero" className="relative flex flex-col sm:flex-row-reverse items-center text-left min-h-[30vh] w-full mt-[150px]">
+      <div className="container hero-container flex flex-col sm:flex-row-reverse justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4">
+        <div className="flex flex-col md:flex-row-reverse items-center">
+          <div className="w-full md:w-1/2 mb-8 md:mb-0">
+            <Image 
+              src={ImageBackground} 
+              alt="Team working" 
+              className="rounded-lg shadow-lg w-full" 
+              width={1000} 
+              height={400} 
+            />
+          </div>
+          <div className="w-full md:w-1/2 md:pr-8">
             <h1 className="text-3xl text-black mb-4 leading-none font-bold lg:text-5xl xl:text-6xl 2xl:text-8xl">
               JSME MOST PRO
               <br />
               BUDOUCNOST
             </h1>
-            <p className="text-sm text-[#4A4A4A] leading-relaxed max-w-[850px] lg:text-xl xl:text-2xl 2xl:text-4xl 2xl:leading-relaxed">
+            <p className="text-sm text-[#4A4A4A] leading-relaxed lg:text-base font-500 xl:text-lg 2xl:text-xl 2xl:leading-relaxed 4xl:text-2xl mb-4">
               Coworkingové centrum (COMO) v srdci Mostu nabízí nejen flexibilní a vybavené prostory na práci pro freelancery, firmy a týmová setkání, ale také komunitu, která si navzájem pomáhá a profesionální vzdělání zdarma.
             </p>
-            <button 
-              className="bg-[#008DD2] text-white rounded-full mt-6 px-10 py-5 text-sm md:px-12 md:py-6 md:text-lg lg:px-12 lg:py-7 lg:text-xl xl:px-20 xl:py-8 xl:text-2xl 2xl:px-14 2xl:py-9 2xl:text-3xl transition-colors duration-500 hover:bg-[#2d547d] focus:bg-[#2d547d] mb-4 text-xs sm:mb-8"
+            <button
+              className="px-4 py-2 border-2 border-[#008DD2] text-[#008DD2] rounded-md hover:text-white transition-colors duration-1000 w-[300px] ss:w-[200px] sm:w-[250px] md:w-[300px]"
               style={buttonStyle}
-              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#2d547d')}
-              onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
-              onFocus={e => (e.currentTarget.style.backgroundColor = '#2d547d')}
-              onBlur={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'transparent')}
+              onFocus={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
+              onBlur={e => (e.currentTarget.style.backgroundColor = 'transparent')}
               onClick={navigate}
             >
-              NEVÁHEJTE A PŘIDEJTE SE K NÁM
+              VÍCE INFORMACÍ
             </button>
-          </div>
-          <div className="order-1 sm:order-2 w-full sm:max-w-[50%] mb-10 sm:mb-0">
-            <Image 
-              src={ImageBackground} 
-              alt="Coworking space" 
-              width={1000} 
-              height={400} 
-              className="max-w-full h-auto block"
-            />
           </div>
         </div>
       </div>
     </section>
   );
-};
+}
 
-export default Hero;
+export default AboutUs;

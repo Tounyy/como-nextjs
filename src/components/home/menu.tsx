@@ -162,11 +162,17 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ product, feature }) => (
 );
 
 const ComparisonTable: React.FC = () => {
-    const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-    const navigate = (direction: number) => {
-      setCurrentIndex((prevIndex) => (prevIndex + direction + data.products.length) % data.products.length);
-    };
+  const navigate = (direction: number) => {
+    setCurrentIndex((prevIndex) => (prevIndex + direction + data.products.length) % data.products.length);
+  };
+
+  const buttonStyle: React.CSSProperties = {
+    letterSpacing: '0.05em',
+    fontWeight: 600,
+    transition: 'background-color 0.5s'
+  };
 
   return (
     <section className="relative items-center text-center w-full mt-auto min-h-full">
@@ -229,7 +235,8 @@ const ComparisonTable: React.FC = () => {
             <FeatureCard key={feature} product={data.products[currentIndex]} feature={feature} />
           ))}
         </div>
-        <a href="/cenik" 
+        <button
+          style={buttonStyle}
           className="
             text-white bg-[#008DD2] hover:bg-[#2d547d] rounded-lg	
             7xl:mt-6 7xl:py-[16px] 7xl:px-[200px] 7xl:text-[30px]
@@ -238,7 +245,7 @@ const ComparisonTable: React.FC = () => {
             s:mt-6 s:py-[16px] s:px-[30px] s:text-[12px]"
         >
           ZOBRAZIT CENÍK
-        </a>
+        </button>
       </div>
     </section>
   );
