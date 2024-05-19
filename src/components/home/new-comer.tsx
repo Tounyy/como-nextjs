@@ -39,13 +39,13 @@ const AboutUs: React.FC = () => {
             <p className="text-sm text-[#4A4A4A] leading-relaxed lg:text-base font-500 xl:text-lg 2xl:text-xl 2xl:leading-relaxed 4xl:text-2xl mb-4">
               Vítejte v COMO! Ať už jste freelancer, start-up nebo hledáte inspirativní místo k práci, jste u nás doma. Zde najdete důležité informace pro váš pohodlný start.
             </p>
-            <button
-              className="px-4 py-2 border-2 border-[#008DD2] text-[#008DD2] rounded-md hover:text-white transition-colors duration-1000 w-[300px] ss:w-[200px] sm:w-[250px] md:w-[300px]"
+            <button 
+              className="bg-[#008DD2] text-white rounded-lg mt-6 px-8 py-5 text-sm md:px-12 md:py-6 md:text-lg lg:px-12 lg:py-7 lg:text-xl xl:px-20 xl:py-8 xl:text-2xl 2xl:px-14 2xl:py-6 2xl:text-3xl transition-colors duration-500 hover:bg-[#2d547d] focus:bg-[#2d547d] mb-4 text-xs sm:mb-8"
               style={buttonStyle}
-              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
-              onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'transparent')}
-              onFocus={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
-              onBlur={e => (e.currentTarget.style.backgroundColor = 'transparent')}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#2d547d')}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
+              onFocus={e => (e.currentTarget.style.backgroundColor = '#2d547d')}
+              onBlur={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
               onClick={navigate}
             >
               VÍCE INFORMACÍ

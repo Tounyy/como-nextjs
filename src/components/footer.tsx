@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-white min-h-[5rem] w-full flex items-center justify-center text-center text-[#353C73] font-600 text-xs md:text-2xl">
+    <footer className="bg-white min-h-[5rem] w-full flex items-center justify-center text-center text-[#353C73] font-600 text-lg">
       <div className="container min-h flex flex-col items-center justify-center">
         <p>
           Copyright © 2024 COMO | COMO je zřízen a provozován statutárním městem Most. Prohlášení o přístupnosti stránek naleznete 

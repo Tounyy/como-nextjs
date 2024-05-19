@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 const image1 = '/img/event/Facebook-post-18.png';
 const image2 = '/img/event/Facebook-post-18.png';
 const image3 = '/img/event/Facebook-post-18.png';

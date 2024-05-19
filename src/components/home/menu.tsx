@@ -180,13 +180,13 @@ const ComparisonTable: React.FC = () => {
         <h1 className="text-2xl text-black mb-10 leading-none font-bold s:text-3xl md:text-3xl lg:text-5xl xl:text-6xl 2xl:text-6xl">
           Vyberte si svůj plán
         </h1>
-        <div className="table-container hidden xl:block relative overflow-x-auto shadow-md sm:rounded-lg border border-gray-300 max-w-[1500px] 7xl:max-w-[2000px] overflow-y-auto">
-          <table className="w-full text-[15px] text-left text-gray-500 2xxl:text-[16px] 4xl:text-[19px] 5xl:text-[22px] 6xl:text-[25px] 7xl:text-[30px]">
+        <div className="table-container hidden xl:block relative shadow-md sm:rounded-lg border border-gray-300 max-w-[1500px] 7xl:max-w-[2000px] overflow-y-auto">
+          <table className="w-full text-[15px] text-left text-gray-500 2xxl:text-[16px] 4xl:text-[19px] 5xl:text-[22px] 6xl:text-[25px] 7xl:text-[30px] fixed-tab">
             <thead className="text-[15px] text-gray-700 uppercase bg-gray-50 2xxl:text-[16px] 4xl:text-[19px] 5xl:text-[22px] 6xl:text-[25px] 7xl:text-[30px]">
-              <tr>
-                <th scope="col" className="py-3 px-6">Vlastnost</th>
+              <tr className='tabr'>
+                <th scope="col" className="tabh py-3 px-6 fixed-column border border-gray-300">Vlastnost</th>
                 {data.products.map(product => (
-                  <th key={product.name} scope="col" className="py-3 px-6">
+                  <th key={product.name} scope="col" className="py-3 px-6 border border-gray-300">
                     {product.name} <br/>
                     <span className="text-[12px] 2xxl:text-[12px] 4xl:text-[14px] 5xl:text-[17px] 6xl:text-[20px] 7xl:text-[23px] text-gray-400">{product.time}</span>
                   </th>
@@ -196,11 +196,11 @@ const ComparisonTable: React.FC = () => {
             <tbody>
               {data.features.map(feature => (
                 <tr key={feature} className="bg-white border-b">
-                  <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
+                  <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap fixed-column border border-gray-300">
                     {feature}
                   </th>
                   {data.products.map(product => (
-                    <td key={product.name} className="py-4 px-6">
+                    <td key={product.name} className="py-4 px-6 border border-gray-300">
                       <span className={`font-medium ${product.details[feature as keyof ProductDetail] === "Ano" ? 'text-green-500' : product.details[feature as keyof ProductDetail] === "Ne" ? 'text-red-500' : 'text-black'}`}>
                         {product.details[feature as keyof ProductDetail]}
                       </span>
@@ -214,6 +214,7 @@ const ComparisonTable: React.FC = () => {
 
         <div className="xl:hidden w-full max-w-4xl shadow-md p-4 rounded-lg border border-gray-300">
           <div className="flex items-center justify-between mb-4">
+            
             <button onClick={() => navigate(-1)} className="text-gray-500">
               <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -230,11 +231,13 @@ const ComparisonTable: React.FC = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
+
           </div>
           {data.features.map((feature: keyof ProductDetail) => (
             <FeatureCard key={feature} product={data.products[currentIndex]} feature={feature} />
           ))}
         </div>
+        
         <button
           style={buttonStyle}
           className="

@@ -11,7 +11,7 @@ const WorkspaceFeatures = () => {
   return (
     <section className="bg-white py-10">
       <h1 className="text-center text-2xl text-black mb-10 leading-none font-bold s:text-3xl md:text-3xl lg:text-5xl xl:text-6xl 2xl:text-6xl">Co vám nabízíme?</h1>
-      <div className="container mx-auto px-4 max-w-[1500px] 7xl:max-w-[1700px]">
+      <div className="container flex flex-col sm:flex-row justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
           {/* Blok 1 */}
           <div className="bg-white shadow-md sm:rounded-lg border border-gray-300 p-6 text-center flex flex-col items-center">

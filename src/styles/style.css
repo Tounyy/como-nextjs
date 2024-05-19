@@ -222,7 +222,7 @@ a {
   text-transform: uppercase;
   display: block;
   padding: 20px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 #header .nav-list ul li:hover a {
@@ -424,25 +424,29 @@ h3 {
   overflow-x: auto;
 }
 
-table {
+.fixed-tab {
   width: 100%;
   min-width: 600px;
 }
 
-th,
-td {
+.tabr,
+.tabh {
   min-width: 120px;
   white-space: nowrap;
   padding: 10px;
   text-align: left;
 }
 
-.sticky-col {
+.fixed-column {
+  position: -webkit-sticky;
   position: sticky;
-  left: 0;
+  left: -1px;
   background-color: white;
   z-index: 10;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-header {
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
 }
 
 ::-webkit-scrollbar-track {
