@@ -465,3 +465,7 @@ h3 {
   background: #555;
   /* Barva posuvníku při najetí myší */
 }
+
+.flex.w-full.overflow-hidden {
+  overflow-x: auto;
+}

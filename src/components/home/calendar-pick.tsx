@@ -21,6 +21,9 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 
 import eventData from "@/data/eventsData";
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+
 interface Event {
   id: number;
   name: string;
@@ -98,20 +101,12 @@ export default function DatePickerWithRange({
       </Popover>
 
       <section className="relative flex flex-col sm:flex-row-reverse items-center text-left w-full">
-        <div className="container hero-container flex flex-col sm:flex-row-reverse justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4 rounded-lg border border-gray-300 shadow-md">
-
-          <div className={`w-full mx-auto ${className} flex items-center`}>
-
-            <button onClick={() => navigate(-1)} className="absolute left-0 z-10 ml-4 text-gray-500">
-              <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-
-            <div className="flex w-full overflow-hidden">
+        <div className="container hero-container flex flex-col sm:flex-row-reverse justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4 rounded-lg border border-gray-300 shadow-md relative hidden xl:block">
+          <div className={`w-full mx-auto ${className} flex items-center relative`}>
+            <div className="flex w-full overflow-hidden relative pl-16 pr-16">
               {filteredEvents.slice(currentIndex, currentIndex + 2).map((event) => (
-                <div key={event.id} className="flex-none w-1/2 p-4">
-                  <div className="flex flex-col min-h-full w-full text-black overflow-hidden border rounded-lg shadow-md">
+                <a key={event.id} href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}`} className="flex-none w-1/2 p-4">
+                  <div className="flex flex-col min-h-full w-full text-black overflow-hidden rounded-lg border border-gray-300 shadow-md">
                     <img src={event.image} alt={event.name} className="w-full h-100 object-cover" />
                     <div className="p-4 flex flex-col justify-center bg-white">
                       <h1 className="text-xl font-bold">{event.name}</h1>
@@ -119,21 +114,50 @@ export default function DatePickerWithRange({
                       <p>{event.time}</p>
                     </div>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
-
-            <button onClick={() => navigate(1)} className="absolute right-0 z-10 mr-4 text-gray-500">
+            <button onClick={() => navigate(-1)} className="absolute left-0 z-10 ml-4 text-gray-500 top-1/2 transform -translate-y-1/2">
+              <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button onClick={() => navigate(1)} className="absolute right-0 z-10 mr-4 text-gray-500 top-1/2 transform -translate-y-1/2">
               <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
-
           </div>
-
         </div>
-      </section>
 
+        <div className={`w-full mx-auto ${className} flex justify-center items-center relative xl:hidden rounded-lg border border-gray-300 shadow-md`}>
+            <Swiper
+              spaceBetween={50}
+              slidesPerView={1}
+              onSlideChange={() => console.log('slide change')}
+              onSwiper={(swiper) => console.log(swiper)}
+              className="w-full relative px-16 flex justify-center items-center"
+              scrollbar={{ hide: true }}
+              navigation={false}
+            >
+                {filteredEvents.map((event) => (
+                    <SwiperSlide key={event.id} className="flex flex-col items-center justify-center w-full h-full">
+                        <a href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}`} className="p-4 w-full flex flex-col items-center justify-center">
+                            <div className="w-full rounded-lg border border-gray-300 shadow-md">
+                                <img src={event.image} alt={event.name} className="w-full h-auto object-cover" />
+                                <div className="p-4">
+                                    <h1 className="text-xl font-bold">{event.name}</h1>
+                                    <p className="mb-2">{format(parseISO(event.date), "PPP", { locale: cs })}</p>
+                                    <p>{event.time}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+        </div>
+
+      </section>
     </div>
   );
 }
