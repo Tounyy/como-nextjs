@@ -42,7 +42,6 @@ export default function DatePickerWithRange({
 
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (dateRange?.from && dateRange?.to) {
@@ -101,7 +100,7 @@ export default function DatePickerWithRange({
       </Popover>
 
       <section className="relative flex flex-col sm:flex-row-reverse items-center text-left w-full">
-        <div className="container hero-container flex flex-col sm:flex-row-reverse justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4 rounded-lg border border-gray-300 shadow-md relative hidden xl:block">
+        <div className="container hero-container flex flex-col sm:flex-row-reverse justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4 relative hidden xl:block">
           <div className={`w-full mx-auto ${className} flex items-center relative`}>
             <div className="flex w-full overflow-hidden relative pl-16 pr-16">
               {filteredEvents.slice(currentIndex, currentIndex + 2).map((event) => (
@@ -131,30 +130,30 @@ export default function DatePickerWithRange({
         </div>
 
         <div className={`w-full mx-auto ${className} flex justify-center items-center relative xl:hidden rounded-lg border border-gray-300 shadow-md`}>
-            <Swiper
-              spaceBetween={50}
-              slidesPerView={1}
-              onSlideChange={() => console.log('slide change')}
-              onSwiper={(swiper) => console.log(swiper)}
-              className="w-full relative px-16 flex justify-center items-center"
-              scrollbar={{ hide: true }}
-              navigation={false}
-            >
-                {filteredEvents.map((event) => (
-                    <SwiperSlide key={event.id} className="flex flex-col items-center justify-center w-full h-full">
-                        <a href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}`} className="p-4 w-full flex flex-col items-center justify-center">
-                            <div className="w-full rounded-lg border border-gray-300 shadow-md">
-                                <img src={event.image} alt={event.name} className="w-full h-auto object-cover" />
-                                <div className="p-4">
-                                    <h1 className="text-xl font-bold">{event.name}</h1>
-                                    <p className="mb-2">{format(parseISO(event.date), "PPP", { locale: cs })}</p>
-                                    <p>{event.time}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+          <Swiper
+            spaceBetween={50}
+            slidesPerView={1}
+            onSlideChange={() => console.log('slide change')}
+            onSwiper={(swiper) => console.log(swiper)}
+            className="w-full relative px-16 flex justify-center items-center"
+            scrollbar={{ hide: true }}
+            navigation={false}
+          >
+            {filteredEvents.map((event) => (
+              <SwiperSlide key={event.id} className="flex flex-col items-center justify-center w-full h-full">
+                <a href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}`} className="p-2 sm:p-8 w-full flex flex-col items-center justify-center">
+                  <div className="flex flex-col min-h-full w-full text-black overflow-hidden rounded-lg border border-gray-300 shadow-md">
+                      <img src={event.image} alt={event.name} className="w-full h-auto object-cover" />
+                      <div className="p-4">
+                        <h1 className="text-2xl font-bold">{event.name}</h1>
+                        <p className="text-sm">{format(parseISO(event.date), "PPP", { locale: cs })}</p>
+                        <p className="text-sm">{event.time}</p>
+                      </div>
+                  </div>
+                </a>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
 
       </section>
