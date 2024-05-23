@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 interface ProductDetail {
   "Cena": string
@@ -222,8 +223,26 @@ const ComparisonTable: React.FC = () => {
             </button>
 
             <div className="text-center">
-              <span className="text-[20px] text-gray-700 uppercase bg-gray-50 2xxl:text-[25px] 4xl:text-[27px] 5xl:text-[28px] 6xl:text-[28px] 7xl:text-[30px] font-bold">{data.products[currentIndex].name}</span><br/>
-              <span className="text-[14px] 2xxl:text-[12px] 4xl:text-[14px] 5xl:text-[17px] 6xl:text-[20px] 7xl:text-[23px] text-gray-400 font-bold">{data.products[currentIndex].time}</span>
+              <motion.span
+                key={data.products[currentIndex].name}
+                className="text-[20px] text-gray-700 uppercase bg-gray-50 2xxl:text-[25px] 4xl:text-[27px] 5xl:text-[28px] 6xl:text-[28px] 7xl:text-[30px] font-bold"
+                initial={{ opacity: 0, x: 1000 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -1000 }}
+                transition={{ duration: 0.5 }}
+              >
+                {data.products[currentIndex].name}
+              </motion.span><br/>
+              <motion.span
+                key={data.products[currentIndex].time}
+                className="text-[14px] 2xxl:text-[12px] 4xl:text-[14px] 5xl:text-[17px] 6xl:text-[20px] 7xl:text-[23px] text-gray-400 font-bold"
+                initial={{ opacity: 0, x: 1000 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -1000 }}
+                transition={{ duration: 0.5 }}
+              >
+                {data.products[currentIndex].time}
+              </motion.span>
             </div>
 
             <button onClick={() => navigate(1)} className="text-gray-500">
@@ -233,9 +252,17 @@ const ComparisonTable: React.FC = () => {
             </button>
 
           </div>
-          {data.features.map((feature: keyof ProductDetail) => (
-            <FeatureCard key={feature} product={data.products[currentIndex]} feature={feature} />
-          ))}
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, x: 1000 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -1000 }}
+            transition={{ duration: 0.5 }}
+          >
+            {data.features.map((feature: keyof ProductDetail) => (
+              <FeatureCard key={feature} product={data.products[currentIndex]} feature={feature} />
+            ))}
+          </motion.div>
         </div>
         
         <button

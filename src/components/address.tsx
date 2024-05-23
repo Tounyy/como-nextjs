@@ -32,7 +32,7 @@ const Address: React.FC = () => {
           </address>
         </div>
         <div className="container m-4 p-5 bg-white rounded-lg max-w-sm">
-          <h2 className="text-2xl text-[#353C73] font-bold mb-5 text-left 3xl:text-4xl">Pro Novináře</h2>
+          <h2 className="text-2xl text-[#353C73] font-bold mb-5 text-left">Pro Novináře</h2>
           <p className="text-left">Brand Manual s logotypy <span onClick={() => navigateTo('...')} className='hover:text-blue-600 transition-colors cursor-pointer'>ZDE</span>.</p>
         </div>
       </div>

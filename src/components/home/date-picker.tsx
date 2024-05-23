@@ -73,7 +73,7 @@ export default function DatePickerWithRange({
             id="date"
             variant="outline"
             className={cn(
-              "w-[300px] my-20 justify-start text-left font-normal shadow-md rounded-lg border border-gray-300 4xl:h-[100px] 4xl:text-[1.8rem] 4xl:w-[600px]",
+              "w-[300px] my-10 justify-start text-left font-normal shadow-md rounded-lg border border-gray-300 4xl:h-[100px] 4xl:text-[1.8rem] 4xl:w-[600px]",
               !dateRange && "text-muted-foreground"
             )}
           >
@@ -102,7 +102,7 @@ export default function DatePickerWithRange({
       </Popover>
 
       <section className="relative flex flex-col sm:flex-row-reverse items-center text-left w-full">
-        <div className="container hero-container flex flex-col sm:flex-row-reverse justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4 relative hidden xl:block">
+        <div className="container hero-container flex flex-col sm:flex-row-reverse justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4 relative hidden xl:block xl:shadow-md xl:rounded-lg xl:border xl:border-gray-300">
           <div className={`w-full mx-auto ${className} flex items-center relative`}>
             <div className="flex w-full overflow-hidden relative pl-16 pr-16">
               {filteredEvents.slice(currentIndex, currentIndex + 2).map((event) => (
@@ -131,7 +131,7 @@ export default function DatePickerWithRange({
           </div>
         </div>
 
-        <div className={`w-full mx-auto ${className} flex justify-center items-center relative xl:hidden rounded-lg border border-gray-300 shadow-md`}>
+        <div className={`w-full mx-auto ${className} flex justify-center items-center relative xl:hidden`}>
           <Swiper
             modules={[Pagination]}
             pagination={{
