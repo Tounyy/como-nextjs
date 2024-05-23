@@ -125,7 +125,7 @@ a {
 /* Navbar */
 #header {
   position: fixed;
-  z-index: 30;
+  z-index: 100;
   left: 0;
   top: 0;
   width: 100%;
@@ -195,6 +195,7 @@ a {
 }
 
 @media (hover: hover) and (pointer: fine) {
+
   .rezer_button:hover,
   .rezer_button:focus {
     background-color: #2d547d;

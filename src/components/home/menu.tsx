@@ -153,7 +153,7 @@ const data = {
 };
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ product, feature }) => (
-  <div className="flex justify-between items-center px-6 py-2 border-b border-gray-200">
+  <div className="flex justify-between items-center px-6 py-2">
       <span className="text-gray-700">{feature}</span>
       <span className={`font-medium ${product.details[feature as keyof ProductDetail] === "Ano" ? 'text-green-500' : product.details[feature as keyof ProductDetail] === "Ne" ? 'text-red-500' : 'text-black'}`}>
           {product.details[feature as keyof ProductDetail]}
@@ -180,8 +180,8 @@ const ComparisonTable: React.FC = () => {
         <h1 className="text-2xl text-black mb-10 leading-none font-bold s:text-3xl md:text-3xl lg:text-5xl xl:text-6xl 2xl:text-6xl">
           Vyberte si svůj plán
         </h1>
-        <div className="table-container hidden xl:block relative shadow-md sm:rounded-lg border border-gray-300 max-w-[1500px] 7xl:max-w-[2000px] overflow-y-auto">
-          <table className="w-full text-[15px] text-left text-gray-500 2xxl:text-[16px] 4xl:text-[19px] 5xl:text-[22px] 6xl:text-[25px] 7xl:text-[30px] fixed-tab">
+        <div className="table-container hidden xl:block relative rounded-lg border border-gray-300 max-w-[1500px] 7xl:max-w-[2000px] overflow-y-auto">
+          <table className="w-full text-[15px] text-left text-gray-500 2xxl:text-[16px] 4xl:text-[19px] 5xl:text-[22px] 6xl:text-[25px] 7xl:text-[30px] fixed-tab rounded-[200px] border border-gray-300">
             <thead className="text-[15px] text-gray-700 uppercase bg-gray-50 2xxl:text-[16px] 4xl:text-[19px] 5xl:text-[22px] 6xl:text-[25px] 7xl:text-[30px]">
               <tr className='tabr'>
                 <th scope="col" className="tabh py-3 px-6 fixed-column border border-gray-300">Vlastnost</th>
@@ -249,6 +249,7 @@ const ComparisonTable: React.FC = () => {
         >
           ZOBRAZIT CENÍK
         </button>
+
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   format,
   isWithinInterval,
@@ -10,9 +10,8 @@ import {
   endOfDay,
 } from "date-fns";
 import { cs } from "date-fns/locale";
-import { Calendar as CalendarIcon } from "lucide-react";
+import { CalendarIcon } from "@radix-ui/react-icons"
 import { DateRange } from "react-day-picker";
-import "react-day-picker/dist/style.css";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -22,6 +21,9 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import eventData from "@/data/eventsData";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+
+import 'swiper/css/pagination';
 import 'swiper/css';
 
 interface Event {
@@ -71,11 +73,11 @@ export default function DatePickerWithRange({
             id="date"
             variant="outline"
             className={cn(
-              "w-[300px] my-10 justify-start text-left font-normal",
+              "w-[300px] my-20 justify-start text-left font-normal shadow-md rounded-lg border border-gray-300 4xl:h-[100px] 4xl:text-[1.8rem] 4xl:w-[600px]",
               !dateRange && "text-muted-foreground"
             )}
           >
-            <CalendarIcon className="mr-2 h-4 w-4" />
+            <CalendarIcon className="mr-2 h-6 w-6 4xl:h-12 4xl:w-12" />
             {dateRange?.from ? (
               dateRange.to ? (
                 `${format(dateRange.from, "PPP", { locale: cs })} - ${format(dateRange.to, "PPP", { locale: cs })}`
@@ -87,7 +89,7 @@ export default function DatePickerWithRange({
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
+        <PopoverContent className="w-auto h-auto p-0" align="start">
           <Calendar
             initialFocus
             mode="range"
@@ -131,24 +133,27 @@ export default function DatePickerWithRange({
 
         <div className={`w-full mx-auto ${className} flex justify-center items-center relative xl:hidden rounded-lg border border-gray-300 shadow-md`}>
           <Swiper
-            spaceBetween={50}
+            modules={[Pagination]}
+            pagination={{
+              clickable: true,
+              dynamicBullets: true,
+            }}
+            spaceBetween={100}
             slidesPerView={1}
             onSlideChange={() => console.log('slide change')}
             onSwiper={(swiper) => console.log(swiper)}
             className="w-full relative px-16 flex justify-center items-center"
-            scrollbar={{ hide: true }}
-            navigation={false}
           >
             {filteredEvents.map((event) => (
               <SwiperSlide key={event.id} className="flex flex-col items-center justify-center w-full h-full">
-                <a href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}`} className="p-2 sm:p-8 w-full flex flex-col items-center justify-center">
+                <a href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}`} className="p-2 pb-6 sm:p-8 w-full flex flex-col items-center justify-center">
                   <div className="flex flex-col min-h-full w-full text-black overflow-hidden rounded-lg border border-gray-300 shadow-md">
-                      <img src={event.image} alt={event.name} className="w-full h-auto object-cover" />
-                      <div className="p-4">
-                        <h1 className="text-2xl font-bold">{event.name}</h1>
-                        <p className="text-sm">{format(parseISO(event.date), "PPP", { locale: cs })}</p>
-                        <p className="text-sm">{event.time}</p>
-                      </div>
+                    <img src={event.image} alt={event.name} className="w-full h-auto object-cover" />
+                    <div className="p-4">
+                      <h1 className="text-2xl font-bold">{event.name}</h1>
+                      <p className="text-sm">{format(parseISO(event.date), "PPP", { locale: cs })}</p>
+                      <p className="text-sm">{event.time}</p>
+                    </div>
                   </div>
                 </a>
               </SwiperSlide>

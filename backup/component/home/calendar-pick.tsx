@@ -21,6 +21,9 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 
 import eventData from "@/data/eventsData";
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+
 interface Event {
   id: number;
   name: string;
@@ -36,9 +39,9 @@ export default function DatePickerWithRange({
     from: startOfDay(new Date()),
     to: endOfDay(addDays(new Date(), 12)),
   });
+
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [visibleIndex, setVisibleIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (dateRange?.from && dateRange?.to) {
@@ -52,60 +55,23 @@ export default function DatePickerWithRange({
     }
   }, [dateRange]);
 
-  const scrollLeft = () => {
-    setVisibleIndex((prevIndex) => Math.max(prevIndex - 3, 0));
+  const navigate = (direction: number) => {
+    setCurrentIndex((prevIndex) => {
+      const newIndex = prevIndex + direction;
+      return (newIndex < 0 ? filteredEvents.length - 2 : newIndex) % filteredEvents.length;
+    });
   };
-
-  const scrollRight = () => {
-    setVisibleIndex((prevIndex) =>
-      Math.min(prevIndex + 3, Math.max(filteredEvents.length - 3, 0))
-    );
-  };
-
-  const getVisibleEvents = () => {
-    return filteredEvents.slice(visibleIndex, visibleIndex + 3);
-  };
-
-  // SVG Icons
-  const leftArrowSVG = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      stroke="#5f78f1"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-      className="w-8 h-8"
-    >
-      <path d="M15 18L9 12l6-6" />
-    </svg>
-  );
-
-  const rightArrowSVG = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      stroke="#5f78f1"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-      className="w-8 h-8"
-    >
-      <path d="M9 18l6-6-6-6" />
-    </svg>
-  );
 
   return (
-    <div className={cn("flex flex-col items-center p-5", className)}>
+    <div className={cn("grid gap-2 flex flex-col justify-end items-center p-4", className)}>
+
       <Popover>
         <PopoverTrigger asChild>
           <Button
             id="date"
             variant="outline"
             className={cn(
-              "w-[300px] my-4 justify-start text-left font-normal",
+              "w-[300px] my-10 justify-start text-left font-normal",
               !dateRange && "text-muted-foreground"
             )}
           >
@@ -133,51 +99,64 @@ export default function DatePickerWithRange({
         </PopoverContent>
       </Popover>
 
-      <div className="w-full max-w-screen-xl mx-auto flex items-center justify-center">
-        <button onClick={scrollLeft} className="p-2">
-          {leftArrowSVG}
-        </button>
-        <div
-          ref={carouselRef}
-          className="flex flex-nowrap gap-6 justify-center overflow-x-auto scrollbar-hide w-full"
-          style={{ scrollSnapType: "x mandatory" }}
-        >
-          {getVisibleEvents().map((event) => (
-            <a
-              key={event.id}
-              className="flex-none flex flex-col min-h-[280px] w-80 md:w-[calc(33.33%-1rem)] lg:w-80 text-black overflow-hidden border rounded-lg shadow-md"
-              href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}`}
-              style={{ scrollSnapAlign: "center" }}
-            >
-              <div className="flex-1">
-                <img
-                  src={event.image}
-                  alt={event.name}
-                  className="w-full h-40 object-cover"
-                />
-              </div>
-              <div className="p-4 flex flex-col justify-center bg-white">
-                <h1 className="text-xl font-bold mb-2">{event.name}</h1>
-                <p className="mb-2">
-                  {format(parseISO(event.date), "PPP", { locale: cs })}
-                </p>
-                <p>{event.time}</p>
-              </div>
-            </a>
-          ))}
+      <section className="relative flex flex-col sm:flex-row-reverse items-center text-left w-full">
+        <div className="container hero-container flex flex-col sm:flex-row-reverse justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4 relative hidden xl:block">
+          <div className={`w-full mx-auto ${className} flex items-center relative`}>
+            <div className="flex w-full overflow-hidden relative pl-16 pr-16">
+              {filteredEvents.slice(currentIndex, currentIndex + 2).map((event) => (
+                <a key={event.id} href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}`} className="flex-none w-1/2 p-4">
+                  <div className="flex flex-col min-h-full w-full text-black overflow-hidden rounded-lg border border-gray-300 shadow-md">
+                    <img src={event.image} alt={event.name} className="w-full h-100 object-cover" />
+                    <div className="p-4 flex flex-col justify-center bg-white">
+                      <h1 className="text-xl font-bold">{event.name}</h1>
+                      <p className="mb-2">{format(parseISO(event.date), "PPP", { locale: cs })}</p>
+                      <p>{event.time}</p>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+            <button onClick={() => navigate(-1)} className="absolute left-0 z-10 ml-4 text-gray-500 top-1/2 transform -translate-y-1/2">
+              <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button onClick={() => navigate(1)} className="absolute right-0 z-10 mr-4 text-gray-500 top-1/2 transform -translate-y-1/2">
+              <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
         </div>
-        <button onClick={scrollRight} className="p-2">
-          {rightArrowSVG}
-        </button>
-      </div>
-      <div className="flex justify-between items-center mt-4 w-full max-w-screen-lg mx-auto">
-        <a href="#" className="text-gray-500 hover:text-black">
-          Předchozí Akce
-        </a>
-        <a href="#" className="text-gray-500 hover:text-black">
-          Následující Akce
-        </a>
-      </div>
+
+        <div className={`w-full mx-auto ${className} flex justify-center items-center relative xl:hidden rounded-lg border border-gray-300 shadow-md`}>
+          <Swiper
+            spaceBetween={50}
+            slidesPerView={1}
+            onSlideChange={() => console.log('slide change')}
+            onSwiper={(swiper) => console.log(swiper)}
+            className="w-full relative px-16 flex justify-center items-center"
+            scrollbar={{ hide: true }}
+            navigation={false}
+          >
+            {filteredEvents.map((event) => (
+              <SwiperSlide key={event.id} className="flex flex-col items-center justify-center w-full h-full">
+                <a href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}`} className="p-2 sm:p-8 w-full flex flex-col items-center justify-center">
+                  <div className="flex flex-col min-h-full w-full text-black overflow-hidden rounded-lg border border-gray-300 shadow-md">
+                      <img src={event.image} alt={event.name} className="w-full h-auto object-cover" />
+                      <div className="p-4">
+                        <h1 className="text-2xl font-bold">{event.name}</h1>
+                        <p className="text-sm">{format(parseISO(event.date), "PPP", { locale: cs })}</p>
+                        <p className="text-sm">{event.time}</p>
+                      </div>
+                  </div>
+                </a>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
+      </section>
     </div>
   );
 }

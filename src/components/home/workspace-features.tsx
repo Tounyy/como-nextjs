@@ -14,7 +14,7 @@ const WorkspaceFeatures = () => {
       <div className="container flex flex-col sm:flex-row justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
           {/* Blok 1 */}
-          <div className="bg-white shadow-md sm:rounded-lg border border-gray-300 p-6 text-center flex flex-col items-center">
+          <div className="bg-white shadow-md rounded-lg border border-gray-300 p-6 text-center flex flex-col items-center">
             <div className="w-20 h-20 mb-4 relative flex justify-center items-center 7xl:w-28 7xl:h-28 7xl:mb-6">
               <Image src={table} alt="Monitory na vybraných stolech" layout="fill" objectFit="contain" className='p-2'/>
             </div>
@@ -23,7 +23,7 @@ const WorkspaceFeatures = () => {
           </div>
 
           {/* Blok 2 */}
-          <div className="bg-white shadow-md sm:rounded-lg border border-gray-300 p-6 text-center flex flex-col items-center">
+          <div className="bg-white shadow-md rounded-lg border border-gray-300 p-6 text-center flex flex-col items-center">
             <div className="w-20 h-20 mb-4 relative flex justify-center items-center 7xl:w-28 7xl:h-28 7xl:mb-6">
               <Image src={computer} alt="Monitory na vybraných stolech" layout="fill" objectFit="contain" className='p-2'/>
             </div>
@@ -32,7 +32,7 @@ const WorkspaceFeatures = () => {
           </div>
 
           {/* Blok 3 */}
-          <div className="bg-white shadow-md sm:rounded-lg border border-gray-300 p-6 text-center flex flex-col items-center">
+          <div className="bg-white shadow-md rounded-lg border border-gray-300 p-6 text-center flex flex-col items-center">
             <div className="w-20 h-20 mb-4 relative flex justify-center items-center 7xl:w-28 7xl:h-28 7xl:mb-6">
               <Image src={networking} alt="Monitory na vybraných stolech" layout="fill" objectFit="contain" className='p-2'/>
             </div>
