@@ -51,8 +51,8 @@ const Banner: React.FC = () => {
     <div>
       {consentGiven === 'undecided' && (
         <>
-          <div className="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
-          <section className="fixed inset-0 z-50 flex items-center justify-center p-2">
+          <div className="fixed inset-0 bg-black bg-opacity-50 z-[1000]"></div>
+          <section className="fixed inset-0 z-[1001] flex items-center justify-center p-2">
             <div className="max-[100px] w-[700px] bg-white border border-gray-200 dark:bg-white-800 dark:border-gray-700 rounded-2xl mx-2 p-12">
               <h2 className="text-2xl font-semibold text-black-800 dark:text-black text-center">🍪 Spravovat Souhlas</h2>
               <p className="mt-4 text-sm text-black-600 dark:text-black-300 text-left">
