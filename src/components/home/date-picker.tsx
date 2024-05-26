@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   format,
   isWithinInterval,
@@ -21,10 +21,12 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import eventData from "@/data/eventsData";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
+import SwiperCore, { Swiper as SwiperClass } from 'swiper';
 
-import 'swiper/css/pagination';
 import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 interface Event {
   id: number;
@@ -43,7 +45,7 @@ export default function DatePickerWithRange({
   });
 
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const swiperRef = useRef<SwiperClass | null>(null);
 
   useEffect(() => {
     if (dateRange?.from && dateRange?.to) {
@@ -56,13 +58,6 @@ export default function DatePickerWithRange({
       setFilteredEvents(filtered);
     }
   }, [dateRange]);
-
-  const navigate = (direction: number) => {
-    setCurrentIndex((prevIndex) => {
-      const newIndex = prevIndex + direction;
-      return (newIndex < 0 ? filteredEvents.length - 2 : newIndex) % filteredEvents.length;
-    });
-  };
 
   return (
     <div className={cn("grid gap-2 flex flex-col justify-end items-center p-4", className)}>
@@ -102,32 +97,50 @@ export default function DatePickerWithRange({
       </Popover>
 
       <section className="relative flex flex-col sm:flex-row-reverse items-center text-left w-full">
-        <div className="container hero-container flex flex-col sm:flex-row-reverse justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4 relative hidden xl:block xl:shadow-md xl:rounded-lg xl:border xl:border-gray-300">
+
+        <div className={`container hero-container flex flex-col sm:flex-row-reverse justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4 relative hidden xl:block xl:shadow-md xl:rounded-lg xl:border xl:border-gray-300 ${className}`}>
+        
           <div className={`w-full mx-auto ${className} flex items-center relative`}>
-            <div className="flex w-full overflow-hidden relative pl-16 pr-16">
-              {filteredEvents.slice(currentIndex, currentIndex + 2).map((event) => (
-                <a key={event.id} href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}`} className="flex-none w-1/2 p-4">
-                  <div className="flex flex-col min-h-full w-full text-black overflow-hidden rounded-lg border border-gray-300 shadow-md">
-                    <img src={event.image} alt={event.name} className="w-full h-100 object-cover" />
-                    <div className="p-4 flex flex-col justify-center bg-white">
-                      <h1 className="text-xl font-bold">{event.name}</h1>
-                      <p className="mb-2">{format(parseISO(event.date), "PPP", { locale: cs })}</p>
-                      <p>{event.time}</p>
+            <Swiper
+              onSwiper={(swiper) => swiperRef.current = swiper}
+              modules={[Navigation, Pagination]}
+              pagination={{
+              clickable: true,
+              dynamicBullets: true,
+              }}
+              spaceBetween={10}
+              slidesPerView={2}
+              className="w-full mx-auto flex items-center relative pl-16 pr-16 pt-20 pb-10"
+            >
+              {filteredEvents.map((event) => (
+                <SwiperSlide key={event.id} className="flex-none w-1/2 mb-8">
+                  <a href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}`}>
+                    <div className="flex flex-col min-h-full w-full text-black overflow-hidden rounded-lg border border-gray-300 shadow-md">
+                      <img src={event.image} alt={event.name} className="w-full h-100 object-cover" />
+                      <div className="p-4 flex flex-col justify-center bg-white">
+                        <h1 className="text-xl font-bold">{event.name}</h1>
+                        <p className="mb-2">{format(parseISO(event.date), "PPP", { locale: cs })}</p>
+                        <p>{event.time}</p>
+                      </div>
                     </div>
-                  </div>
-                </a>
+                  </a>
+                </SwiperSlide>
               ))}
+            </Swiper>
+
+            <div className="absolute w-full flex justify-between px-10">
+              <button onClick={() => swiperRef.current?.slidePrev()} className="z-50 text-gray-600 rounded-full bg-white p-2 border border-gray-300 shadow-md">
+                <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button onClick={() => swiperRef.current?.slideNext()} className="z-50 text-gray-600 rounded-full bg-white p-2 border border-gray-300 shadow-md">
+                <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             </div>
-            <button onClick={() => navigate(-1)} className="absolute left-0 z-10 ml-4 text-gray-500 top-1/2 transform -translate-y-1/2">
-              <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button onClick={() => navigate(1)} className="absolute right-0 z-10 mr-4 text-gray-500 top-1/2 transform -translate-y-1/2">
-              <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+
           </div>
         </div>
 
