@@ -1,6 +1,13 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import SwiperCore, { Swiper as SwiperClass } from 'swiper';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 interface ProductDetail {
   "Cena": string
@@ -163,6 +170,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ product, feature }) => (
 
 const ComparisonTable: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const swiperRef = useRef<SwiperClass | null>(null);
 
   const navigate = (direction: number) => {
     setCurrentIndex((prevIndex) => (prevIndex + direction + data.products.length) % data.products.length);
@@ -214,27 +222,43 @@ const ComparisonTable: React.FC = () => {
 
         <div className="xl:hidden w-full max-w-4xl shadow-md p-4 rounded-lg border border-gray-300">
           <div className="flex items-center justify-between mb-4">
-            <button onClick={() => navigate(-1)} className="text-gray-500">
-              <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
 
-            <div className="text-center">
-              <span className="text-[20px] text-gray-700 uppercase bg-gray-50 2xxl:text-[25px] 4xl:text-[27px] 5xl:text-[28px] 6xl:text-[28px] 7xl:text-[30px] font-bold">{data.products[currentIndex].name}</span><br/>
-              <span className="text-[14px] 2xxl:text-[12px] 4xl:text-[14px] 5xl:text-[17px] 6xl:text-[20px] 7xl:text-[23px] text-gray-400 font-bold">{data.products[currentIndex].time}</span>
-            </div>
+            <Swiper
+              onSwiper={(swiper) => swiperRef.current = swiper}
+              modules={[Navigation]}
+              loop={true}  
+            >
+              {data.products.map((product, index) => (
+                <SwiperSlide key={index}>
+                  <div className="text-center flex items-center justify-between">
+                    <button onClick={() => swiperRef.current?.slidePrev()} className="text-gray-500">
+                      <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
 
-            <button onClick={() => navigate(1)} className="text-gray-500">
-              <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+                    <div>
+                      <span className="text-[20px] text-gray-700 uppercase bg-gray-50 2xxl:text-[25px] 4xl:text-[27px] 5xl:text-[28px] 6xl:text-[28px] 7xl:text-[30px] font-bold">{product.name}</span><br/>
+                      <span className="text-[14px] 2xxl:text-[12px] 4xl:text-[14px] 5xl:text-[17px] 6xl:text-[20px] 7xl:text-[23px] text-gray-400 font-bold">{product.time}</span>
+                    </div>
+
+                    <button onClick={() => swiperRef.current?.slideNext()} className="text-gray-500">
+                      <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  {data.features.map((feature: keyof ProductDetail) => (
+                    <FeatureCard key={feature} product={product} feature={feature} />
+                  ))}
+                </SwiperSlide>
+              ))}
+            </Swiper>
+
           </div>
-          {data.features.map((feature: keyof ProductDetail) => (
-            <FeatureCard key={feature} product={data.products[currentIndex]} feature={feature} />
-          ))}
         </div>
+
         <button
           style={buttonStyle}
           className="
@@ -246,6 +270,7 @@ const ComparisonTable: React.FC = () => {
         >
           ZOBRAZIT CENÍK
         </button>
+
       </div>
     </section>
   );
