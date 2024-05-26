@@ -230,7 +230,7 @@ const ComparisonTable: React.FC = () => {
             >
               {data.products.map((product, index) => (
                 <SwiperSlide key={index}>
-                  <div className="text-center flex items-center justify-between">
+                  <div className="flex items-center justify-between text-center">
                     <button onClick={() => swiperRef.current?.slidePrev()} className="text-gray-500">
                       <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
