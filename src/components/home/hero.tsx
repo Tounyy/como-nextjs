@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
               height={400} 
             />
           </div>
-          <div className="flex flex-col items-left justify-left text-left w-full md:w-1/2 p-8">
+          <div className="flex flex-col items-left justify-left text-left w-full md:w-1/2 p-4">
             <h1 className="text-3xl text-black mb-4 leading-none font-bold lg:text-5xl xl:text-6xl 2xl:text-[5rem]">
               JSME MOST PRO
               <br />
