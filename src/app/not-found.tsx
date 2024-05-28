@@ -17,7 +17,7 @@ export default function Custom404() {
   return (
     <>
       <Navbar/>
-      <div className="flex flex-col items-center justify-center h-[30rem] text-center px-4">
+      <div className="flex flex-col items-center justify-center h-[30rem] text-center px-4 min-h-[30vh] w-full mt-[100px] 2xl:mt-[150px] s:mt-[80px]">
         <h1 className="text-3xl md:text-5xl font-bold">Vypadá to, že tato stránka neexistuje.</h1>
         <p className="mt-4 text-lg md:text-xl">Vypadá to, že odkaz, který vás sem odkázal, byl chybný. Nechcete zkusit vyhledávání?</p>
         <button onClick={goToHomePage} className="mt-6 text-blue-500">Zpět na hlavní stránku</button>

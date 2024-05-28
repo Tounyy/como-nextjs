@@ -1,11 +1,12 @@
 "use client";
+
 import React from 'react';
 import Navbar from "@/components/navbar";
 import { Calendar } from "@/components/ui/calendar";
 import Reservation from "@/components/reservation/choose-reservation";
 import Footer from "@/components/footer";
 
-export default function Home() {
+export default function Reservation_form() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
 
   const [startTime, setStartTime] = React.useState('7');
