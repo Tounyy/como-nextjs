@@ -38,6 +38,23 @@ interface Event {
   image: string;
 }
 
+function createCleanUrl(text: string): string {
+  const from = "áčďéěíňóřšťúůýžÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ";
+  const to = "acdeeinorstuuyzACDEEINORSTUUYZ";
+
+  // Nahrazení diakritických znaků
+  for (let i = 0, l = from.length; i < l; i++) {
+    text = text.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+  }
+
+  // Odstranění všech nepovolených znaků a normalizace pro URL
+  return text
+    .replace(/[^a-z0-9 -]/gi, '')  // Odstraní vše kromě alfanumerických znaků a pomlček/mezer
+    .replace(/\s+/g, '-')          // Nahradí mezery pomlčkami
+    .replace(/-+/g, '-')           // Zredukuje více pomlček na jednu
+    .toLowerCase();                // Převede vše na malá písmena
+}
+
 export default function DatePickerWithRange({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
@@ -145,7 +162,7 @@ export default function DatePickerWithRange({
               >
                 {filteredEvents.map((event) => (
                   <SwiperSlide key={event.id} className="flex flex-col items-center justify-center w-full h-full">
-                    <a href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}-${event.id}`} className="p-2 pb-6 sm:p-8 w-full flex flex-col items-center justify-center">
+                    <a href={`/event/${createCleanUrl(event.name)}-${event.id}-${event.date}`} className="p-2 pb-6 sm:p-8 w-full flex flex-col items-center justify-center">
                       <div className="flex flex-col min-h-full w-full text-black overflow-hidden rounded-lg border border-gray-300 shadow-md">
                         <img src={event.image} alt={event.name} className="w-full h-100 object-cover" />
                         <div className="p-4">
@@ -190,7 +207,7 @@ export default function DatePickerWithRange({
           >
             {filteredEvents.map((event) => (
               <SwiperSlide key={event.id} className="flex flex-col items-center justify-center w-full h-full">
-                <a href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}-${event.id}`} className="p-2 pb-6 sm:p-8 w-full flex flex-col items-center justify-center">
+                <a href={`/event/${createCleanUrl(event.name)}-${event.id}-${event.date}`} className="p-2 pb-6 sm:p-8 w-full flex flex-col items-center justify-center">
                   <div className="flex flex-col min-h-full w-full text-black overflow-hidden rounded-lg border border-gray-300 shadow-md">
                     <img src={event.image} alt={event.name} className="w-full h-auto object-cover" />
                     <div className="p-4">

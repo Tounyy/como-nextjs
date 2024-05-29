@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface Event {
   id: number;
@@ -17,13 +18,15 @@ const EventDetail: React.FC = () => {
   const [eventId, setEventId] = useState<number | null>(null);
   const [firstEvent, setFirstEvent] = useState<Event | null>(null);
   const [isPastEvent, setIsPastEvent] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
     const path = window.location.pathname;
-    const id = path.split('-').pop();
+    const parts = path.split('-');
+    const idPart = parts.find(part => /^\d+$/.test(part)); // Najde část, která obsahuje pouze čísla
 
-    if (id) {
-      setEventId(Number(id));
+    if (idPart) {
+      setEventId(Number(idPart));
     }
   }, []);
 
@@ -56,11 +59,28 @@ const EventDetail: React.FC = () => {
     <section className="relative flex flex-col sm:flex-row-reverse items-center text-left min-h-[30vh] w-full mt-[150px] 2xl:mt-[200px] s:mt-[130px]">
       <div className="container hero-container flex flex-col sm:flex-row-reverse justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4">
         <div className="bg-white text-gray-800 p-4 sm:p-6 md:p-8">
+
+          <div className="mt-4">
+            <button 
+              onClick={() => router.back()} 
+              className="flex items-center justify-center text-black py-2 rounded text-base font-semibold tracking-wide my-6"
+            >
+
+            <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+
+              Všechny Akce
+
+            </button>
+          </div>
+
           {isPastEvent && (
             <div className="bg-blue-100 text-blue-800 p-4 rounded">
               Akce již proběhla.
             </div>
           )}
+
           <div className='py-10'>
             <h2 className="text-xl md:text-2xl font-bold mb-2">{firstEvent.name}</h2>
             <div className="flex justify-between items-center mb-4">
@@ -72,6 +92,7 @@ const EventDetail: React.FC = () => {
               <a href="#" className="text-blue-600 hover:text-blue-800 visited:text-purple-600">Learn more</a>
             </div>
           </div>
+
         </div>
       </div>
     </section>
