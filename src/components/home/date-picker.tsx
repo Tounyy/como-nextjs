@@ -114,15 +114,15 @@ export default function DatePickerWithRange({
 
         <button 
           className="bg-[#008DD2] text-white rounded-lg py-3 px-10 transition-colors duration-500 hover:bg-[#2d547d] focus:bg-[#2d547d] text-xs"
-            style={buttonStyle}
-            onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#2d547d')}
-            onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
-            onFocus={e => (e.currentTarget.style.backgroundColor = '#2d547d')}
-            onBlur={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
-            onClick={navigate}
-          >
-            Další Akce
-          </button>
+          style={buttonStyle}
+          onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#2d547d')}
+          onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
+          onFocus={e => (e.currentTarget.style.backgroundColor = '#2d547d')}
+          onBlur={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
+          onClick={navigate}
+        >
+          Další Akce
+        </button>
       </div>
 
       <section className="relative flex flex-col sm:flex-row-reverse items-center text-left w-full">
@@ -145,7 +145,7 @@ export default function DatePickerWithRange({
               >
                 {filteredEvents.map((event) => (
                   <SwiperSlide key={event.id} className="flex flex-col items-center justify-center w-full h-full">
-                    <a href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}`} className="p-2 pb-6 sm:p-8 w-full flex flex-col items-center justify-center">
+                    <a href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}-${event.id}`} className="p-2 pb-6 sm:p-8 w-full flex flex-col items-center justify-center">
                       <div className="flex flex-col min-h-full w-full text-black overflow-hidden rounded-lg border border-gray-300 shadow-md">
                         <img src={event.image} alt={event.name} className="w-full h-100 object-cover" />
                         <div className="p-4">
@@ -190,7 +190,7 @@ export default function DatePickerWithRange({
           >
             {filteredEvents.map((event) => (
               <SwiperSlide key={event.id} className="flex flex-col items-center justify-center w-full h-full">
-                <a href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}`} className="p-2 pb-6 sm:p-8 w-full flex flex-col items-center justify-center">
+                <a href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}-${event.id}`} className="p-2 pb-6 sm:p-8 w-full flex flex-col items-center justify-center">
                   <div className="flex flex-col min-h-full w-full text-black overflow-hidden rounded-lg border border-gray-300 shadow-md">
                     <img src={event.image} alt={event.name} className="w-full h-auto object-cover" />
                     <div className="p-4">

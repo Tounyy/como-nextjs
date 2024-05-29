@@ -20,16 +20,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 
 import eventData from "@/data/eventsData";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-import SwiperCore, { Swiper as SwiperClass } from 'swiper';
-
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-
-import { useRouter } from 'next/navigation';
-
 interface Event {
   id: number;
   name: string;
@@ -47,34 +37,85 @@ export default function DatePickerWithRange({
   });
 
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
-  const swiperRef = useRef<SwiperClass | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [suggestions, setSuggestions] = useState<Event[]>([]);
 
-  const buttonStyle: React.CSSProperties = {
-    letterSpacing: '0.05em',
-    fontWeight: 600,
-    transition: 'background-color 0.5s'
-  };
+  useEffect(() => {
+    const filtered = eventData.filter((event) =>
+      (dateRange?.from && dateRange?.to && isWithinInterval(parseISO(event.date), {
+        start: dateRange.from,
+        end: dateRange.to
+      })) && event.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredEvents(filtered);
+  }, [searchQuery, dateRange]);
 
-  const router = useRouter();
-
-  const navigate = (): void => {
-    router.push('/further-action');
+  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setFilteredEvents(suggestions);
+    }
   };
 
   useEffect(() => {
-    if (dateRange?.from && dateRange?.to) {
-      const filtered = eventData.filter((event) =>
-        isWithinInterval(parseISO(event.date), {
-          start: dateRange.from as Date,
-          end: dateRange.to as Date,
-        })
-      );
-      setFilteredEvents(filtered);
+    if (searchQuery) {
+      const filtered = eventData.filter(event =>
+        event.name.toLowerCase().includes(searchQuery.toLowerCase())
+      ).slice(0, 5);
+      setSuggestions(filtered);
+    } else {
+      setSuggestions([]);
     }
-  }, [dateRange]);
+  }, [searchQuery]);
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+  };
+
+  const handleSelectSuggestion = (name: string) => {
+    setSearchQuery(name);
+    
+    const filtered = eventData.filter(event =>
+      event.name.toLowerCase() === name.toLowerCase()
+    );
+    
+    setFilteredEvents(filtered);
+  };
 
   return (
     <div className={cn("grid gap-2 flex flex-col justify-end items-center p-4 mt-[150px] 2xl:mt-[200px] s:mt-[130px]", className)}>
+
+      <div className="flex w-full max-w-xl">
+        <input
+          type="text"
+          placeholder="Hledat eventy..."
+          className="form-input px-4 py-2 border border-gray-300 rounded-l-md w-full"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleSearch}
+        />
+        <button
+          onClick={handleClearSearch}
+          className="bg-[#008DD2] duration-500 text-white font-bold py-2 px-4 rounded-r-md"
+          onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#2d547d')}
+          onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
+          onFocus={e => (e.currentTarget.style.backgroundColor = '#2d547d')}
+          onBlur={e => (e.currentTarget.style.backgroundColor = '#008DD2')}
+        >
+          Odstranit
+        </button>
+      </div>
+
+      {searchQuery && (
+        <ul className="list-none p-2 w-full max-w-xl bg-white shadow-md rounded-lg">
+          {suggestions.map((event) => (
+            <li key={event.id} className="p-2 hover:bg-gray-100 cursor-pointer"
+                onClick={() => handleSelectSuggestion(event.name)}>
+              {event.name}
+            </li>
+          ))}
+        </ul>
+      )}
+
       <Popover>
         <PopoverTrigger asChild>
           <Button
@@ -115,7 +156,7 @@ export default function DatePickerWithRange({
             <div className="w-full overflow-hidden relative">
               {filteredEvents.map((event) => (
                 <div key={event.id} className="flex flex-col items-center justify-center w-full h-full">
-                  <a href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}`} className="p-2 pb-6 sm:p-4 w-full flex flex-col items-center justify-center">
+                <a href={`/event/${event.name.replace(/\s+/g, "-").toLowerCase()}-${event.id}`} className="p-2 pb-6 sm:p-8 w-full flex flex-col items-center justify-center">
                     <div className="flex flex-col min-h-full w-full text-black overflow-hidden rounded-lg border border-gray-300 shadow-md max-w-[1000px]">
                       <img src={event.image} alt={event.name} className="w-full h-100 object-cover" />
                       <div className="p-4">
