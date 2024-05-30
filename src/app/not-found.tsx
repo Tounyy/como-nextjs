@@ -4,7 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 
 import Navbar from '@/components/navbar'; 
-import Address from '@/components/address'; 
+import Address from '@/components/addres'; 
 import Footer from '@/components/footer'; 
 
 export default function Custom404() {

@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Home - COMO</title>
+        <title>Kontakty - COMO</title>
         <link rel="icon" href="/img/favicon.ico" />
       </head>
       

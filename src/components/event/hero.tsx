@@ -56,7 +56,7 @@ const EventDetail: React.FC = () => {
   }
 
   return (
-    <section className="relative flex flex-col sm:flex-row-reverse items-center text-left min-h-[30vh] w-full mt-[150px] 2xl:mt-[200px] s:mt-[130px]">
+    <section className="relative flex flex-col sm:flex-row-reverse items-center text-left min-h-[30vh] w-full mt-[150px] 2xl:mt-[100px] s:mt-[130px]">
       <div className="container hero-container flex flex-col sm:flex-row-reverse justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4">
         <div className="bg-white text-gray-800 p-4 sm:p-6 md:p-8">
 
@@ -90,6 +90,20 @@ const EventDetail: React.FC = () => {
             <p className="text-md md:text-lg">{firstEvent.description}</p>
             <div className="mt-4">
               <a href="#" className="text-blue-600 hover:text-blue-800 visited:text-purple-600">Learn more</a>
+            </div>
+          </div>
+
+          <div className="relative shadow-md rounded-lg border border-gray-300 overflow-hidden">
+            <div className="w-full h-450">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1268.8331809643482!2d13.640568!3d50.503167!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470a211c6fa73d61%3A0x973f5a8fb7dfe3c1!2sCoworking%20Most!5e0!3m2!1sen!2sus!4v1717062884643!5m2!1sen!2sus"
+                width="100%"
+                height="450"
+                style={{ border: 0 }}
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
           </div>
 

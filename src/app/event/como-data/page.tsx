@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import Navbar from "@/components/navbar";
-import Address from "@/components/address";
+import Address from "@/components/addres";
 import Footer from "@/components/footer";
 
 const Learningdatahero = lazy(() => import("@/components/como-data/learningdatahero"));
