@@ -15,6 +15,13 @@ const config = {
       padding: "2rem",
     },
     extend: {
+      transitionDuration: {
+        '1500': '1500ms',
+        '1800': '1800ms',
+        '2000': '2000ms',
+        '2100': '2100ms',
+      },
+      transform: ['hover', 'focus'],
       screens: {
         's': '320px',
         'ss': '400px',

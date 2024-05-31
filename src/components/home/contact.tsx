@@ -112,6 +112,7 @@ const Contact: React.FC<ContactProps> = () => {
                 Souhlasím se zpracováním osobních údajů v rozsahu <a href="https://www.coworking-most.cz/souhlas-s-zpracovanim-osobnich-udaju/" className="text-black underline">Zásad ochrany osobních údajů</a> Coworkingem Most (statutární město Most),
               </label>
             </div>
+            
             <div className="flex justify-center">
               <button 
                 className="
