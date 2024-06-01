@@ -5,7 +5,7 @@ import React from 'react';
 const ReservationForm = () => {
   return (
     <div className="max-w-6xl mx-auto p-5">
-      <div className="grid grid-cols-2 items-center mb-16"> {/* Adjusted bottom margin for spacing */}
+      <div className="grid grid-cols-2 items-center mb-16">
         <h1 className="text-3xl font-bold text-gray-900">REZERVACE TERMÍNU</h1>
         <div>
           <p className="mb-4">
@@ -17,7 +17,7 @@ const ReservationForm = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 items-center mb-16"> {/* Last div for consistent styling */}
+      <div className="grid grid-cols-2 items-center mb-16">
         <h1 className="text-3xl font-bold text-gray-900">UZAVŘENÍ SMLOUVY</h1>
         <div>
           <p className="mb-4">
@@ -29,7 +29,7 @@ const ReservationForm = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 items-center mb-16"> {/* Adjusted bottom margin for spacing */}
+      <div className="grid grid-cols-2 items-center mb-16">
         <h1 className="text-3xl font-bold text-gray-900">NABITÍ ID KARTY PRO VYUŽITÍ TISKOVÝCH SLUŽEB</h1>
         <div>
           <p className="mb-4">
@@ -38,7 +38,7 @@ const ReservationForm = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 items-center mb-16"> {/* Adjusted bottom margin for spacing */}
+      <div className="grid grid-cols-2 items-center mb-16">
         <h1 className="text-3xl font-bold text-gray-900">VSTUP DO PRACOVIŠTĚ</h1>
         <div>
           <p className="mb-4">
@@ -47,7 +47,7 @@ const ReservationForm = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 items-center mb-16"> {/* Last div for consistent styling */}
+      <div className="grid grid-cols-2 items-center mb-16">
         <h1 className="text-3xl font-bold text-gray-900">OPUŠTĚNÍ PRACOVIŠTĚ</h1>
         <div>
           <p className="mb-4">
@@ -59,7 +59,7 @@ const ReservationForm = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 items-center mb-16"> {/* Adjusted bottom margin for spacing */}
+      <div className="grid grid-cols-2 items-center mb-16">
         <h1 className="text-3xl font-bold text-gray-900">VYUŽITÍ WIFI SÍTĚ</h1>
         <div>
           <p className="mb-4">
@@ -68,7 +68,7 @@ const ReservationForm = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 items-center mb-16"> {/* Adjusted bottom margin for spacing */}
+      <div className="grid grid-cols-2 items-center mb-16">
         <h1 className="text-3xl font-bold text-gray-900">VYUŽITÍ SLUŽEB TISKOVÉHO CENTRA</h1>
         <div>
           <p className="mb-4">
@@ -90,7 +90,7 @@ const ReservationForm = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 items-center mb-16"> {/* Last div for consistent styling */}
+      <div className="grid grid-cols-2 items-center mb-16">
         <h1 className="text-3xl font-bold text-gray-900">Důležité kontaktní osoby</h1>
         <div>
           <h1 className='font-bold'>UZAVÍRÁNÍ KRÁTKODOBÝCH SMLUV (DENNÍ A HODINOVÉ TARIFY)</h1>

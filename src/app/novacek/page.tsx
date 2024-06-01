@@ -2,9 +2,9 @@
 
 import React from 'react';
 import Navbar from "@/components/navbar";
-import Hero from "@/components/cenik/hero";
-import Information from "@/components/cenik/information";
-import Contact from "@/components/cenik/contact";
+import Hero from "@/components/novacek/hero";
+import Information from "@/components/novacek/information";
+import Contact from "@/components/novacek/contact";
 import Addres from "@/components/addres";
 import Footer from "@/components/footer";
 

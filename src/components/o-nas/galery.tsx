@@ -20,7 +20,7 @@ const Galery: React.FC = () => {
   return (
     <section className="items-center text-left min-h-[30vh] w-full">
       <div className="container hero-container sm:flex-row-reverse justify-between items-center mx-auto w-full max-w-[1500px] 6xl:max-w-[2000px] p-4">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
           {images.map((image, index) => (
             <div key={index} className="overflow-hidden rounded-lg hover:scale-105 transition-transform duration-300">
               <Image
